@@ -140,255 +140,116 @@
       <div class="container">
         <div class="columns">
           <main class="main-column">
-<div class="card">
+<article class="card card-content">
+  <header>
+    <h1 class="post-title">
+      koa模板
+    </h1>
+  </header>
+  <div class="post-meta post-show-meta">
+    <time datetime="2022-04-07T02:12:10.000Z" style="display: flex; align-items: center;">
+      <i class="iconfont icon-calendar" style="margin-right: 2px;"></i>
+      <span>2022-04-07</span>
+    </time>
+    
+    <span class="dot"></span>
+    
+    <a href="/categories/Nodejs/" class="post-meta-link">Nodejs</a>
+    
+    
+    
+    <span class="dot"></span>
+    <span>247 words</span>
+    
+  </div>
   
-  <article class="card card-content">
-    <a href="/2022/04/07/koa模板/">
-      <h1 class="post-title">
-        koa模板
-      </h1>
-    </a>
-    <div class="card-excerpt">
+  <div class="post-meta post-show-meta" style="margin-top: -10px;">
+    <div style="display: flex; align-items: center;">
+      <i class="iconfont icon-biaoqian" style="margin-right: 2px; font-size: 1.15rem;"></i>
       
-      const
+      
+        <a href="/tags/模板/" class="post-meta-link">模板</a>
+      
+      
+      <span class="dot"></span>
+      
+        <a href="/tags/koa/" class="post-meta-link">koa</a>
       
     </div>
-    <div class="card-post-footer">
-      <div class="post-meta">
-        <time datetime="2022-04-07T02:12:10.000Z" style="display: flex; align-items: center;">
-          <i class="iconfont icon-calendar" style="margin-right: 2px;"></i>
-          <span>2022-04-07</span>
-        </time>
+  </div>
+  
+  </header>
+  <div id="section" class="post-content">
+    <pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">const</span> Koa <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'koa'</span><span class="token punctuation">)</span>
+<span class="token keyword">var</span> app <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Koa</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token comment">// const Router = require("koa-router")</span>
+<span class="token comment">// var router = new Router()</span>
+<span class="token keyword">var</span> router <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'koa-router'</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">// 引入并实例化路由</span>
+
+<span class="token comment">// 匹配任何路由 如果不写 next，这个路由被匹配到了就不会继续向下匹配</span>
+app<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span><span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token parameter">ctx<span class="token punctuation">,</span> next</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+  ctx<span class="token punctuation">.</span>body <span class="token operator">=</span> <span class="token string">'中间件'</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+  <span class="token keyword">await</span> <span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+
+<span class="token comment">// ctx 上下文 context，包含了request和response等信息</span>
+router
+  <span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">'/'</span><span class="token punctuation">,</span> <span class="token keyword">async</span> <span class="token parameter">ctx</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    ctx<span class="token punctuation">.</span>body <span class="token operator">=</span> <span class="token string">'首页'</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">'/news'</span><span class="token punctuation">,</span> <span class="token keyword">async</span> <span class="token parameter">ctx</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    ctx<span class="token punctuation">.</span>body <span class="token operator">=</span> <span class="token string">'新闻'</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+  <span class="token comment">// 动态路由</span>
+  <span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">'/newscontent/:aid/:cid'</span><span class="token punctuation">,</span> <span class="token keyword">async</span> <span class="token parameter">ctx</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// 从ctx中读取get传值</span>
+    <span class="token comment">// 1. ctx.query，获取到的是对象，&#123; id: '1', name: 'a' &#125;</span>
+    <span class="token comment">// console.log(ctx.query)</span>
+    <span class="token comment">// 2. ctx.querystring，获取的是字符串，id=1&amp;&amp;name=a</span>
+    <span class="token comment">// console.log(ctx.querystring)</span>
+    <span class="token comment">// 获取动态路由参数</span>
+    ctx<span class="token punctuation">.</span>body <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">新闻详情--</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>ctx<span class="token punctuation">.</span>params<span class="token punctuation">.</span>aid<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">--</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>ctx<span class="token punctuation">.</span>params<span class="token punctuation">.</span>cid<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token template-punctuation string">`</span></span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+
+<span class="token comment">//   启动路由</span>
+app<span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>router<span class="token punctuation">.</span><span class="token function">routes</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>
+  router<span class="token punctuation">.</span><span class="token function">allowedMethods</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+    <span class="token comment">// throw: true, // 抛出错误，代替设置响应头状态</span>
+    <span class="token comment">// notImplemented: () => '不支持当前请求所需要的功能',</span>
+    <span class="token comment">// methodNotAllowed: () => '不支持的请求方式'</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+<span class="token punctuation">)</span>
+
+app<span class="token punctuation">.</span><span class="token function">listen</span><span class="token punctuation">(</span><span class="token number">3000</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+  </div>
+  <div>
+  
+  </div>
+</article>
+<div class="nav">
+  
+  
+  <div class="nav-item-next">
+    <a href="/2022/04/07/Nodejs搭建http服务器/" class="nav-link">
+      <div>
+        <div class="nav-label">Next</div>
         
-        <span class="dot"></span>
-        
-        <a href="categories/Nodejs/" class="post-meta-link">Nodejs</a>
-        
-        
-        
-        <span class="dot"></span>
-        <span>247 words</span>
+        <div class="nav-title">Nodejs搭建http服务器 </div>
         
       </div>
-      <a href="/2022/04/07/koa%E6%A8%A1%E6%9D%BF/">Read More </a>
-    </div>
-  </article>
-</div>
-
-<div class="card">
-  
-  <article class="card card-content">
-    <a href="/2022/04/07/Nodejs搭建http服务器/">
-      <h1 class="post-title">
-        Nodejs搭建http服务器
-      </h1>
+      <i class="iconfont icon-right nav-next-icon"></i>
     </a>
-    <div class="card-excerpt">
-      
-      // @ts...
-      
-    </div>
-    <div class="card-post-footer">
-      <div class="post-meta">
-        <time datetime="2022-04-07T02:03:52.000Z" style="display: flex; align-items: center;">
-          <i class="iconfont icon-calendar" style="margin-right: 2px;"></i>
-          <span>2022-04-07</span>
-        </time>
-        
-        <span class="dot"></span>
-        
-        <a href="categories/Nodejs/" class="post-meta-link">Nodejs</a>
-        
-        
-        
-        <span class="dot"></span>
-        <span>77 words</span>
-        
-      </div>
-      <a href="/2022/04/07/Nodejs%E6%90%AD%E5%BB%BAhttp%E6%9C%8D%E5%8A%A1%E5%99%A8/">Read More </a>
-    </div>
-  </article>
-</div>
-
-<div class="card">
+  </div>
   
-  <article class="card card-content">
-    <a href="/2022/04/07/express模板/">
-      <h1 class="post-title">
-        express模板
-      </h1>
-    </a>
-    <div class="card-excerpt">
-      
-      const
-      
-    </div>
-    <div class="card-post-footer">
-      <div class="post-meta">
-        <time datetime="2022-04-07T01:47:45.000Z" style="display: flex; align-items: center;">
-          <i class="iconfont icon-calendar" style="margin-right: 2px;"></i>
-          <span>2022-04-07</span>
-        </time>
-        
-        <span class="dot"></span>
-        
-        <a href="categories/Nodejs/" class="post-meta-link">Nodejs</a>
-        
-        
-        
-        <span class="dot"></span>
-        <span>124 words</span>
-        
-      </div>
-      <a href="/2022/04/07/express%E6%A8%A1%E6%9D%BF/">Read More </a>
-    </div>
-  </article>
 </div>
 
-<div class="card">
-  
-  <article class="card card-content">
-    <a href="/2022/04/06/Node.js基础/">
-      <h1 class="post-title">
-        Node.js基础
-      </h1>
-    </a>
-    <div class="card-excerpt">
-      
-      Node.js 基础
-      
-    </div>
-    <div class="card-post-footer">
-      <div class="post-meta">
-        <time datetime="2022-04-06T13:34:10.000Z" style="display: flex; align-items: center;">
-          <i class="iconfont icon-calendar" style="margin-right: 2px;"></i>
-          <span>2022-04-06</span>
-        </time>
-        
-        <span class="dot"></span>
-        
-        <a href="categories/Nodejs/" class="post-meta-link">Nodejs</a>
-        
-        
-        
-        <span class="dot"></span>
-        <span>419 words</span>
-        
-      </div>
-      <a href="/2022/04/06/Node.js%E5%9F%BA%E7%A1%80/">Read More </a>
-    </div>
-  </article>
-</div>
+<div class="card card-content toc-card" id="mobiletoc">
+  <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>TOC</div>
 
-<div class="card">
-  
-  <article class="card card-content">
-    <a href="/2022/04/06/JavaScript垃圾回收机制/">
-      <h1 class="post-title">
-        JavaScript垃圾回收机制
-      </h1>
-    </a>
-    <div class="card-excerpt">
-      
-      JavaScript 垃...
-      
-    </div>
-    <div class="card-post-footer">
-      <div class="post-meta">
-        <time datetime="2022-04-06T13:31:10.000Z" style="display: flex; align-items: center;">
-          <i class="iconfont icon-calendar" style="margin-right: 2px;"></i>
-          <span>2022-04-06</span>
-        </time>
-        
-        <span class="dot"></span>
-        
-        <a href="categories/JavaScript/" class="post-meta-link">JavaScript</a>
-        
-        
-        
-        <span class="dot"></span>
-        <span>3.6k words</span>
-        
-      </div>
-      <a href="/2022/04/06/JavaScript%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/">Read More </a>
-    </div>
-  </article>
-</div>
-
-<div class="card">
-  
-  <article class="card card-content">
-    <a href="/2022/04/06/git 命令/">
-      <h1 class="post-title">
-        git常用命令
-      </h1>
-    </a>
-    <div class="card-excerpt">
-      
-      git 命令
-
-
-
-      
-    </div>
-    <div class="card-post-footer">
-      <div class="post-meta">
-        <time datetime="2022-04-06T13:18:10.000Z" style="display: flex; align-items: center;">
-          <i class="iconfont icon-calendar" style="margin-right: 2px;"></i>
-          <span>2022-04-06</span>
-        </time>
-        
-        <span class="dot"></span>
-        
-        <a href="categories/常用工具/" class="post-meta-link">常用工具</a>
-        
-        
-        
-        <span class="dot"></span>
-        <span>230 words</span>
-        
-      </div>
-      <a href="/2022/04/06/git%20%E5%91%BD%E4%BB%A4/">Read More </a>
-    </div>
-  </article>
-</div>
-
-<div class="card">
-  
-  <article class="card card-content">
-    <a href="/2022/04/06/hexo基本使用/">
-      <h1 class="post-title">
-        hexo基本使用
-      </h1>
-    </a>
-    <div class="card-excerpt">
-      
-      Welcome to Hexo! This is your very first post. Check 
-      
-    </div>
-    <div class="card-post-footer">
-      <div class="post-meta">
-        <time datetime="2022-04-06T05:33:15.000Z" style="display: flex; align-items: center;">
-          <i class="iconfont icon-calendar" style="margin-right: 2px;"></i>
-          <span>2022-04-06</span>
-        </time>
-        
-        <span class="dot"></span>
-        
-        <a href="categories/常用工具/" class="post-meta-link">常用工具</a>
-        
-        
-        
-        <span class="dot"></span>
-        <span>73 words</span>
-        
-      </div>
-      <a href="/2022/04/06/hexo%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/">Read More </a>
-    </div>
-  </article>
-</div>
-
-</main>
+</div></main>
           <aside class="left-column">
             
             <div class="card card-author">
@@ -416,6 +277,13 @@
             
             <div class="sticky-tablet">
   
+  
+  <article class="display-when-two-columns spacer">
+    <div class="card card-content toc-card">
+      <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>TOC</div>
+
+    </div>
+  </article>
   
   
   <article class="card card-content">
@@ -468,58 +336,16 @@
   </article>
   
   
-  <article class="card card-content widescreen-archive">
-    <div class="archive-card">
-  <div class="archive-card-header"><i class="iconfont icon-wodebaobiao" style="padding-right: 2px;"></i>Archive</div>
-  <div class="archive-card-list">
-    
-    
-    
-      
-        
-        
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-    
-      <a href="/archives/2022" class="archive-card-list-item">
-          2022
-          <span class="archive-card-list-item-badge">7</span>
-      </a>
-    
-  </div>
-</div>
-  </article>
-  
 </div>
           </aside>
           <aside class="right-column">
             <div class="sticky-widescreen">
   
+  
+  <article class="card card-content toc-card">
+    <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>TOC</div>
+
+  </article>
   
   
   <article class="card card-content">
@@ -551,53 +377,6 @@
 </div>
   </article>
   
-  
-  <article class="card card-content">
-    <div class="archive-card">
-  <div class="archive-card-header"><i class="iconfont icon-wodebaobiao" style="padding-right: 2px;"></i>Archive</div>
-  <div class="archive-card-list">
-    
-    
-    
-      
-        
-        
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-    
-      <a href="/archives/2022" class="archive-card-list-item">
-          2022
-          <span class="archive-card-list-item-badge">7</span>
-      </a>
-    
-  </div>
-</div>
-  </article>
   
 </div>
           </aside>
