@@ -139,25 +139,87 @@
     <div class="section-wrap">
       <div class="container">
         <div class="columns">
-          <main class="main-column"><div class="card card-content tag-page-card">
-  <div class="tags-page-title">Tags&nbsp-&nbspnpm</div>
-</div>
-<div class="archive-timeline">
-  
-  
+          <main class="main-column">
+<article class="card card-content">
+  <header>
+    <h1 class="post-title">
+      vue3emit传递多个参数
+    </h1>
+  </header>
+  <div class="post-meta post-show-meta">
+    <time datetime="2022-04-13T06:52:34.000Z" style="display: flex; align-items: center;">
+      <i class="iconfont icon-calendar" style="margin-right: 2px;"></i>
+      <span>2022-04-13</span>
+    </time>
     
-      <div class="archive-timeline-tag"><span>2022</span></div>
+    <span class="dot"></span>
+    
+    <a href="/categories/Vue/" class="post-meta-link">Vue</a>
+    
+    
+    
+    <span class="dot"></span>
+    <span>91 words</span>
+    
+  </div>
+  
+  <div class="post-meta post-show-meta" style="margin-top: -10px;">
+    <div style="display: flex; align-items: center;">
+      <i class="iconfont icon-biaoqian" style="margin-right: 2px; font-size: 1.15rem;"></i>
       
-    
-    <div class="archive-timeline-item">
-      <div class="archive-timeline-post">
-        <div class="card card-content">
-          <div class="archive-timeline-post-date">2022-04-06</div>
-          <div class="archive-timeline-post-content"><a href="/2022/04/06/Node.js基础/" class="archive-timeline-post-item">Node.js基础</a></div>
-        </div>
-      </div>
+      
+        <a href="/tags/vue3/" class="post-meta-link">vue3</a>
+      
     </div>
+  </div>
   
+  </header>
+  <div id="section" class="post-content">
+    <p><strong>子组件</strong></p>
+<pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&lt;template&gt;
+  &lt;el-input
+    :modelValue&#x3D;&quot;formData.username&quot;
+    @input&#x3D;&quot;$emit(&#39;update:formData&#39;, [$event, &#39;username&#39;])&quot;
+  &#x2F;&gt;
+&lt;&#x2F;template&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>父组件</strong></p>
+<pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&lt;template&gt;
+  &lt;UserForm :formData&#x3D;&quot;formData&quot; @update:formData&#x3D;&quot;updateFormData&quot; &#x2F;&gt;
+&lt;&#x2F;template&gt;
+
+&lt;script setup&gt;
+const updateFormData &#x3D; e &#x3D;&gt; &#123;
+  console.log(e) &#x2F;&#x2F; [value,&#39;username&#39;]
+  formData.value[e[1]] &#x3D; e[0]
+&#125;
+&lt;&#x2F;script&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+  </div>
+  <div>
+  
+  </div>
+</article>
+<div class="nav">
+  
+  
+  <div class="nav-item-next">
+    <a href="/2022/04/11/typescript笔记/" class="nav-link">
+      <div>
+        <div class="nav-label">Next</div>
+        
+        <div class="nav-title">typescript笔记 </div>
+        
+      </div>
+      <i class="iconfont icon-right nav-next-icon"></i>
+    </a>
+  </div>
+  
+</div>
+
+<div class="card card-content toc-card" id="mobiletoc">
+  <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>TOC</div>
+
 </div></main>
           <aside class="left-column">
             
@@ -186,6 +248,13 @@
             
             <div class="sticky-tablet">
   
+  
+  <article class="display-when-two-columns spacer">
+    <div class="card card-content toc-card">
+      <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>TOC</div>
+
+    </div>
+  </article>
   
   
   <article class="card card-content">
@@ -267,74 +336,16 @@
   </article>
   
   
-  <article class="card card-content widescreen-archive">
-    <div class="archive-card">
-  <div class="archive-card-header"><i class="iconfont icon-wodebaobiao" style="padding-right: 2px;"></i>Archive</div>
-  <div class="archive-card-list">
-    
-    
-    
-      
-        
-        
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-    
-      <a href="/archives/2022" class="archive-card-list-item">
-          2022
-          <span class="archive-card-list-item-badge">11</span>
-      </a>
-    
-  </div>
-</div>
-  </article>
-  
 </div>
           </aside>
           <aside class="right-column">
             <div class="sticky-widescreen">
   
+  
+  <article class="card card-content toc-card">
+    <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>TOC</div>
+
+  </article>
   
   
   <article class="card card-content">
@@ -366,69 +377,6 @@
 </div>
   </article>
   
-  
-  <article class="card card-content">
-    <div class="archive-card">
-  <div class="archive-card-header"><i class="iconfont icon-wodebaobiao" style="padding-right: 2px;"></i>Archive</div>
-  <div class="archive-card-list">
-    
-    
-    
-      
-        
-        
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-    
-      <a href="/archives/2022" class="archive-card-list-item">
-          2022
-          <span class="archive-card-list-item-badge">11</span>
-      </a>
-    
-  </div>
-</div>
-  </article>
   
 </div>
           </aside>
