@@ -159,13 +159,13 @@
     
     
     <span class="dot"></span>
-    <span>525 words</span>
+    <span>1k words</span>
     
   </div>
   
   </header>
   <div id="section" class="post-content">
-    <h2 id="msql基本使用"><a href="#msql基本使用" class="headerlink" title="msql基本使用"></a>msql基本使用</h2><div class="post-note note-warning"><p>文档中<code>[xxx]</code>均表示可选参数</p></div>
+    <h2 id="msql基本使用"><a href="#msql基本使用" class="headerlink" title="msql基本使用"></a>msql基本使用</h2><div class="post-note note-success"><p>文档中<code>[xxx]</code>均表示可选参数</p></div>
 
 <h3 id="启动和停止mysql服务"><a href="#启动和停止mysql服务" class="headerlink" title="启动和停止mysql服务"></a>启动和停止mysql服务</h3><p>mysql默认为开机自启动</p>
 <p><strong>方式一</strong></p>
@@ -173,14 +173,14 @@
 <li><code>win</code>+<code>r</code>输入<code>services.msc</code></li>
 <li>找到Mysql80</li>
 </ul>
-<div class="post-note note-info"><p>Mysql80为安装时设置的系统服务名称，默认为Mysql80</p></div>
+<div class="post-note note-success"><p>Mysql80为安装时设置的系统服务名称，默认为Mysql80</p></div>
 
 <p><strong>方式二</strong>：命令行操作</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">net stop mysql80<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">net start mysql80<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<div class="post-note note-info"><p>需要管理员权限</p></div>
+<div class="post-note note-warning"><p>可能需要管理员权限</p></div>
 
 <h3 id="数据库连接"><a href="#数据库连接" class="headerlink" title="数据库连接"></a>数据库连接</h3><p><strong>方式一</strong>：mysql命令行工具</p>
 <p>输入密码即可</p>
@@ -204,17 +204,17 @@ mysql -h -P -u root -p<span aria-hidden="true" class="line-numbers-rows"><span><
 <tbody><tr>
 <td>DDL</td>
 <td>Data Definition Language</td>
-<td>数据定义语言，用来定义数据库对象（数据库、表、字段）</td>
+<td>数据定义语言，用来定义数据库对象（<strong>数据库、表、字段</strong>）</td>
 </tr>
 <tr>
 <td>DML</td>
 <td>Data Manipulation Language</td>
-<td>数据操作语言，用来对数据库表中的数据进行增删改</td>
+<td>数据操作语言，用来对数据库表中的<strong>数据</strong>进行增删改</td>
 </tr>
 <tr>
 <td>DQL</td>
 <td>Data Query Language</td>
-<td>数据查询语言，用来查询数据库中表的记录</td>
+<td><strong>数据</strong>查询语言，用来查询数据库中表的记录</td>
 </tr>
 <tr>
 <td>DCL</td>
@@ -236,6 +236,8 @@ mysql -h -P -u root -p<span aria-hidden="true" class="line-numbers-rows"><span><
 <span class="token comment"># default cahrset 指定当前数据库使用的字符集，比如utf8mb4</span>
 <span class="token comment"># collate指定排序规则</span>
 <span class="token keyword">create</span> <span class="token keyword">database</span> <span class="token punctuation">[</span><span class="token keyword">if</span> <span class="token operator">not</span> <span class="token keyword">exists</span><span class="token punctuation">]</span> 数据库名称 <span class="token punctuation">[</span><span class="token keyword">default</span> cahrset<span class="token punctuation">]</span> <span class="token punctuation">[</span><span class="token keyword">collate</span><span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<div class="post-note note-warning"><p>UTF8字符集长度为3字节，有些符号占4字节，所以推荐用utf8mb4字符集</p></div>
 
 <p><strong>删除</strong></p>
 <pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">drop</span> <span class="token keyword">database</span> <span class="token punctuation">[</span><span class="token keyword">if</span> <span class="token keyword">exists</span><span class="token punctuation">]</span> 数据库名称<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
@@ -259,9 +261,88 @@ mysql -h -P -u root -p<span aria-hidden="true" class="line-numbers-rows"><span><
     字段<span class="token number">2</span> 字段<span class="token number">2</span>类型 <span class="token punctuation">[</span><span class="token keyword">comment</span> 字段<span class="token number">2</span>注释<span class="token punctuation">]</span><span class="token punctuation">,</span>
     <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
     字段n 字段n类型 <span class="token punctuation">[</span><span class="token keyword">comment</span> 字段n注释<span class="token punctuation">]</span>
-<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token keyword">comment</span> 表注释<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token keyword">comment</span> 表注释<span class="token punctuation">]</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p><strong>数据类型</strong></p>
+<p><strong>修改</strong></p>
+<p>添加字段</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">ALTER</span> <span class="token keyword">TABLE</span> 表名 <span class="token keyword">ADD</span> 字段名 类型<span class="token punctuation">(</span>长度<span class="token punctuation">)</span> <span class="token punctuation">[</span><span class="token keyword">COMMENT</span> 注释<span class="token punctuation">]</span> <span class="token punctuation">[</span>约束<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>修改字段</p>
+<ul>
+<li><p>修改数据类型</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">ALTER</span> <span class="token keyword">TABLE</span> 表名 <span class="token keyword">MODIFY</span> 字段名 新数据类型<span class="token punctuation">(</span>长度<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
+<li><p>修改字段名和数据类型</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">ALTER</span> <span class="token keyword">TABLE</span> 表名 CHANGE 旧字段名 新字段名 类型<span class="token punctuation">(</span>长度<span class="token punctuation">)</span> <span class="token punctuation">[</span><span class="token keyword">COMMENT</span> 注释<span class="token punctuation">]</span> <span class="token punctuation">[</span>约束<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+</ul>
+<p>删除字段</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">ALTER</span> <span class="token keyword">TABLE</span> 表名 <span class="token keyword">DROP</span> 字段名<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>修改表名</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">ALTER</span> <span class="token keyword">TABLE</span> 表名 <span class="token keyword">RENAME</span> <span class="token keyword">TO</span> 新表名<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><strong>删除</strong></p>
+<p>删除表</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">DROP</span> <span class="token keyword">TABLE</span> <span class="token punctuation">[</span><span class="token keyword">IF</span> <span class="token keyword">EXISTS</span><span class="token punctuation">]</span> 表名<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>删除表，并重新创建该表（表结构还在，表中的数据被删除了）</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">TRUNCATE</span> <span class="token keyword">TABLE</span> 表名<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<div class="post-note note-warning"><p>删除表时，表中的数据都会被删除</p></div>
+
+<h3 id="DML-Data-Manipulation-Language"><a href="#DML-Data-Manipulation-Language" class="headerlink" title="DML Data Manipulation Language"></a>DML Data Manipulation Language</h3><h4 id="添加数据"><a href="#添加数据" class="headerlink" title="添加数据"></a>添加数据</h4><p><strong>添加单条数据</strong></p>
+<p>指定字段</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> 表名 <span class="token punctuation">(</span>字段名<span class="token number">1</span><span class="token punctuation">,</span> 字段名<span class="token number">2</span><span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span> <span class="token keyword">VALUES</span> <span class="token punctuation">(</span>值<span class="token number">1</span><span class="token punctuation">,</span> 值<span class="token number">2</span><span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>全部字段</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> 表名 <span class="token keyword">VALUES</span> <span class="token punctuation">(</span>值<span class="token number">1</span><span class="token punctuation">,</span> 值<span class="token number">2</span><span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><strong>批量添加数据</strong></p>
+<p>指定字段</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> 表名 <span class="token punctuation">(</span>字段名<span class="token number">1</span><span class="token punctuation">,</span> 字段名<span class="token number">2</span><span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span> <span class="token keyword">VALUES</span> <span class="token punctuation">(</span>值<span class="token number">1</span><span class="token punctuation">,</span> 值<span class="token number">2</span><span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>值<span class="token number">1</span><span class="token punctuation">,</span> 值<span class="token number">2</span><span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>值<span class="token number">1</span><span class="token punctuation">,</span> 值<span class="token number">2</span><span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>全部字段</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> 表名 <span class="token keyword">VALUES</span> <span class="token punctuation">(</span>值<span class="token number">1</span><span class="token punctuation">,</span> 值<span class="token number">2</span><span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>值<span class="token number">1</span><span class="token punctuation">,</span> 值<span class="token number">2</span><span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>值<span class="token number">1</span><span class="token punctuation">,</span> 值<span class="token number">2</span><span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h4 id="修改数据"><a href="#修改数据" class="headerlink" title="修改数据"></a>修改数据</h4><pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">UPDATE</span> 表名 <span class="token keyword">SET</span> 字段名<span class="token number">1</span> <span class="token operator">=</span> 值<span class="token number">1</span><span class="token punctuation">,</span> 字段名<span class="token number">2</span> <span class="token operator">=</span> 值<span class="token number">2</span><span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token punctuation">[</span> <span class="token keyword">WHERE</span> 条件 <span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h4 id="删除数据"><a href="#删除数据" class="headerlink" title="删除数据"></a>删除数据</h4><pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">DELETE</span> <span class="token keyword">FROM</span> 表名 <span class="token punctuation">[</span> <span class="token keyword">WHERE</span> 条件 <span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<div class="post-note note-warning"><p>修改和删除数据时，如果没有where条件，会改变整张表的所有数据</p></div>
+
+<h3 id="DQL-Data-Query-Language"><a href="#DQL-Data-Query-Language" class="headerlink" title="DQL Data Query Language"></a>DQL Data Query Language</h3><h4 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h4><pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span>
+	字段列表
+<span class="token keyword">FROM</span>
+	表名字段
+<span class="token keyword">WHERE</span>
+	条件列表
+<span class="token keyword">GROUP</span> <span class="token keyword">BY</span>
+	分组字段列表
+<span class="token keyword">HAVING</span>
+	分组后的条件列表
+<span class="token keyword">ORDER</span> <span class="token keyword">BY</span>
+	排序字段列表
+<span class="token keyword">LIMIT</span>
+	分页参数<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="基本查询"><a href="#基本查询" class="headerlink" title="基本查询"></a>基本查询</h4><p><strong>查询多个字段</strong></p>
+<p>多个字段</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> 字段<span class="token number">1</span><span class="token punctuation">,</span> 字段<span class="token number">2</span><span class="token punctuation">,</span> 字段<span class="token number">3</span><span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token keyword">FROM</span> 表名<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>所有字段</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">FROM</span> 表名<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><strong>设置别名</strong></p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> 字段<span class="token number">1</span> <span class="token punctuation">[</span> <span class="token keyword">AS</span> 别名<span class="token number">1</span> <span class="token punctuation">]</span><span class="token punctuation">,</span> 字段<span class="token number">2</span> <span class="token punctuation">[</span> <span class="token keyword">AS</span> 别名<span class="token number">2</span> <span class="token punctuation">]</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token keyword">FROM</span> 表名<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> 字段<span class="token number">1</span> <span class="token punctuation">[</span> 别名<span class="token number">1</span> <span class="token punctuation">]</span><span class="token punctuation">,</span> 字段<span class="token number">2</span> <span class="token punctuation">[</span> 别名<span class="token number">2</span> <span class="token punctuation">]</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token keyword">FROM</span> 表名<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><strong>去除重复记录</strong></p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> <span class="token keyword">DISTINCT</span> 字段列表 <span class="token keyword">FROM</span> 表名<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h4 id="条件查询"><a href="#条件查询" class="headerlink" title="条件查询"></a>条件查询</h4><p><strong>语法</strong></p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> 字段列表 <span class="token keyword">FROM</span> 表名 <span class="token keyword">WHERE</span> 条件列表<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
 
   </div>
   <div>
@@ -269,6 +350,18 @@ mysql -h -P -u root -p<span aria-hidden="true" class="line-numbers-rows"><span><
   </div>
 </article>
 <div class="nav">
+  
+  <div class="nav-item-prev">
+    <a href="/2022/04/18/socket-io笔记/" class="nav-link">
+      <i class="iconfont icon-left nav-prev-icon"></i>
+      <div>
+        <div class="nav-label">Prev</div>
+        
+        <div class="nav-title">socket.io笔记 </div>
+        
+      </div>
+    </a>
+  </div>
   
   
   <div class="nav-item-next">
@@ -287,7 +380,7 @@ mysql -h -P -u root -p<span aria-hidden="true" class="line-numbers-rows"><span><
 
 <div class="card card-content toc-card" id="mobiletoc">
   <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>TOC</div>
-<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#msql%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="toc-text">msql基本使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8%E5%92%8C%E5%81%9C%E6%AD%A2mysql%E6%9C%8D%E5%8A%A1"><span class="toc-text">启动和停止mysql服务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5"><span class="toc-text">数据库连接</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL%E8%AF%AD%E5%8F%A5"><span class="toc-text">SQL语句</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E7%B1%BB"><span class="toc-text">分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DDL-Data-Definition-Language"><span class="toc-text">DDL(Data Definition Language)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C"><span class="toc-text">数据库操作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A1%A8%E6%93%8D%E4%BD%9C"><span class="toc-text">表操作</span></a></li></ol></li></ol></li></ol>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#msql%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="toc-text">msql基本使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8%E5%92%8C%E5%81%9C%E6%AD%A2mysql%E6%9C%8D%E5%8A%A1"><span class="toc-text">启动和停止mysql服务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5"><span class="toc-text">数据库连接</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL%E8%AF%AD%E5%8F%A5"><span class="toc-text">SQL语句</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E7%B1%BB"><span class="toc-text">分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DDL-Data-Definition-Language"><span class="toc-text">DDL(Data Definition Language)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C"><span class="toc-text">数据库操作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A1%A8%E6%93%8D%E4%BD%9C"><span class="toc-text">表操作</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DML-Data-Manipulation-Language"><span class="toc-text">DML Data Manipulation Language</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E6%95%B0%E6%8D%AE"><span class="toc-text">添加数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E6%95%B0%E6%8D%AE"><span class="toc-text">修改数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E6%95%B0%E6%8D%AE"><span class="toc-text">删除数据</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DQL-Data-Query-Language"><span class="toc-text">DQL Data Query Language</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95"><span class="toc-text">语法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%9F%A5%E8%AF%A2"><span class="toc-text">基本查询</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9D%A1%E4%BB%B6%E6%9F%A5%E8%AF%A2"><span class="toc-text">条件查询</span></a></li></ol></li></ol></li></ol>
 </div></main>
           <aside class="left-column">
             
@@ -299,11 +392,11 @@ mysql -h -P -u root -p<span aria-hidden="true" class="line-numbers-rows"><span><
 <p class="author-description"></p>
 <div class="author-message">
   <a class="author-posts-count" href="/archives">
-    <span>12</span>
+    <span>13</span>
     <span>Posts</span>
   </a>
   <a class="author-categories-count" href="/categories">
-    <span>7</span>
+    <span>8</span>
     <span>Categories</span>
   </a>
   <a class="author-tags-count" href="/tags">
@@ -320,7 +413,7 @@ mysql -h -P -u root -p<span aria-hidden="true" class="line-numbers-rows"><span><
   <article class="display-when-two-columns spacer">
     <div class="card card-content toc-card">
       <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>TOC</div>
-<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#msql%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="toc-text">msql基本使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8%E5%92%8C%E5%81%9C%E6%AD%A2mysql%E6%9C%8D%E5%8A%A1"><span class="toc-text">启动和停止mysql服务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5"><span class="toc-text">数据库连接</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL%E8%AF%AD%E5%8F%A5"><span class="toc-text">SQL语句</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E7%B1%BB"><span class="toc-text">分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DDL-Data-Definition-Language"><span class="toc-text">DDL(Data Definition Language)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C"><span class="toc-text">数据库操作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A1%A8%E6%93%8D%E4%BD%9C"><span class="toc-text">表操作</span></a></li></ol></li></ol></li></ol>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#msql%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="toc-text">msql基本使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8%E5%92%8C%E5%81%9C%E6%AD%A2mysql%E6%9C%8D%E5%8A%A1"><span class="toc-text">启动和停止mysql服务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5"><span class="toc-text">数据库连接</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL%E8%AF%AD%E5%8F%A5"><span class="toc-text">SQL语句</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E7%B1%BB"><span class="toc-text">分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DDL-Data-Definition-Language"><span class="toc-text">DDL(Data Definition Language)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C"><span class="toc-text">数据库操作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A1%A8%E6%93%8D%E4%BD%9C"><span class="toc-text">表操作</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DML-Data-Manipulation-Language"><span class="toc-text">DML Data Manipulation Language</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E6%95%B0%E6%8D%AE"><span class="toc-text">添加数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E6%95%B0%E6%8D%AE"><span class="toc-text">修改数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E6%95%B0%E6%8D%AE"><span class="toc-text">删除数据</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DQL-Data-Query-Language"><span class="toc-text">DQL Data Query Language</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95"><span class="toc-text">语法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%9F%A5%E8%AF%A2"><span class="toc-text">基本查询</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9D%A1%E4%BB%B6%E6%9F%A5%E8%AF%A2"><span class="toc-text">条件查询</span></a></li></ol></li></ol></li></ol>
     </div>
   </article>
   
@@ -329,6 +422,13 @@ mysql -h -P -u root -p<span aria-hidden="true" class="line-numbers-rows"><span><
     <div class="categories-card">
   <div class="categories-header"><i class="iconfont icon-fenlei" style="padding-right: 2px;"></i>Categories</div>
   <div class="categories-list">
+    
+      <a href="/categories/其他">
+        <div class="categories-list-item">
+          其他
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
     
       <a href="/categories/常用工具">
         <div class="categories-list-item">
@@ -388,23 +488,23 @@ mysql -h -P -u root -p<span aria-hidden="true" class="line-numbers-rows"><span><
   <div class="tags-header"><i class="iconfont icon-biaoqian" style="padding-right: 2px;"></i>hot tags</div>
   <div class="tags-list">
     
-    <a href="\tags\模板" title="模板"><div class="tags-list-item">模板</div></a>
-    
-    <a href="\tags\vue3" title="vue3"><div class="tags-list-item">vue3</div></a>
-    
-    <a href="\tags\npm" title="npm"><div class="tags-list-item">npm</div></a>
-    
-    <a href="\tags\原理" title="原理"><div class="tags-list-item">原理</div></a>
-    
-    <a href="\tags\eslint" title="eslint"><div class="tags-list-item">eslint</div></a>
-    
-    <a href="\tags\koa" title="koa"><div class="tags-list-item">koa</div></a>
-    
-    <a href="\tags\express" title="express"><div class="tags-list-item">express</div></a>
+    <a href="\tags\git" title="git"><div class="tags-list-item">git</div></a>
     
     <a href="\tags\hexo" title="hexo"><div class="tags-list-item">hexo</div></a>
     
-    <a href="\tags\git" title="git"><div class="tags-list-item">git</div></a>
+    <a href="\tags\express" title="express"><div class="tags-list-item">express</div></a>
+    
+    <a href="\tags\模板" title="模板"><div class="tags-list-item">模板</div></a>
+    
+    <a href="\tags\koa" title="koa"><div class="tags-list-item">koa</div></a>
+    
+    <a href="\tags\eslint" title="eslint"><div class="tags-list-item">eslint</div></a>
+    
+    <a href="\tags\原理" title="原理"><div class="tags-list-item">原理</div></a>
+    
+    <a href="\tags\npm" title="npm"><div class="tags-list-item">npm</div></a>
+    
+    <a href="\tags\vue3" title="vue3"><div class="tags-list-item">vue3</div></a>
     
   </div>
 </div>
@@ -419,7 +519,7 @@ mysql -h -P -u root -p<span aria-hidden="true" class="line-numbers-rows"><span><
   
   <article class="card card-content toc-card">
     <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>TOC</div>
-<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#msql%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="toc-text">msql基本使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8%E5%92%8C%E5%81%9C%E6%AD%A2mysql%E6%9C%8D%E5%8A%A1"><span class="toc-text">启动和停止mysql服务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5"><span class="toc-text">数据库连接</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL%E8%AF%AD%E5%8F%A5"><span class="toc-text">SQL语句</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E7%B1%BB"><span class="toc-text">分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DDL-Data-Definition-Language"><span class="toc-text">DDL(Data Definition Language)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C"><span class="toc-text">数据库操作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A1%A8%E6%93%8D%E4%BD%9C"><span class="toc-text">表操作</span></a></li></ol></li></ol></li></ol>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#msql%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="toc-text">msql基本使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8%E5%92%8C%E5%81%9C%E6%AD%A2mysql%E6%9C%8D%E5%8A%A1"><span class="toc-text">启动和停止mysql服务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5"><span class="toc-text">数据库连接</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL%E8%AF%AD%E5%8F%A5"><span class="toc-text">SQL语句</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E7%B1%BB"><span class="toc-text">分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DDL-Data-Definition-Language"><span class="toc-text">DDL(Data Definition Language)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C"><span class="toc-text">数据库操作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A1%A8%E6%93%8D%E4%BD%9C"><span class="toc-text">表操作</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DML-Data-Manipulation-Language"><span class="toc-text">DML Data Manipulation Language</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E6%95%B0%E6%8D%AE"><span class="toc-text">添加数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E6%95%B0%E6%8D%AE"><span class="toc-text">修改数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E6%95%B0%E6%8D%AE"><span class="toc-text">删除数据</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DQL-Data-Query-Language"><span class="toc-text">DQL Data Query Language</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95"><span class="toc-text">语法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%9F%A5%E8%AF%A2"><span class="toc-text">基本查询</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9D%A1%E4%BB%B6%E6%9F%A5%E8%AF%A2"><span class="toc-text">条件查询</span></a></li></ol></li></ol></li></ol>
   </article>
   
   
@@ -427,6 +527,11 @@ mysql -h -P -u root -p<span aria-hidden="true" class="line-numbers-rows"><span><
     <div class="recent-posts-card">
   <div class="recent-posts-header"><i class="iconfont icon-wenzhang_huaban" style="padding-right: 2px;"></i>Recent Posts</div>
   <div class="recent-posts-list">
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2022-04-18</div>
+        <a href="/2022/04/18/socket-io笔记/"><div class="recent-posts-item-content">socket.io笔记</div></a>
+      </div>
     
       <div class="recent-posts-item">
         <div class="recent-posts-item-title">2022-04-17</div>
@@ -441,11 +546,6 @@ mysql -h -P -u root -p<span aria-hidden="true" class="line-numbers-rows"><span><
       <div class="recent-posts-item">
         <div class="recent-posts-item-title">2022-04-11</div>
         <a href="/2022/04/11/typescript笔记/"><div class="recent-posts-item-content">typescript笔记</div></a>
-      </div>
-    
-      <div class="recent-posts-item">
-        <div class="recent-posts-item-title">2022-04-09</div>
-        <a href="/2022/04/09/vue命名时的大小写问题/"><div class="recent-posts-item-content">vue命名时的大小写问题</div></a>
       </div>
     
   </div>
