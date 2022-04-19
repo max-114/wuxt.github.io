@@ -171,7 +171,8 @@
 <p><strong>使用</strong></p>
 <pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">const</span> io <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'scoket.io'</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token number">3000</span>，<span class="token punctuation">&#123;</span>
   <span class="token literal-property property">cors</span><span class="token operator">:</span><span class="token punctuation">&#123;</span>
-    <span class="token literal-property property">origin</span><span class="token operator">:</span><span class="token punctuation">[</span><span class="token string">'http://localhost:8080'</span><span class="token punctuation">]</span> <span class="token comment">// 数组中传入允许跨域请求的客户端地址，也可以直接赋值为'*'，允许所有跨域请求</span>
+    <span class="token comment">// 数组中传入允许跨域请求的客户端地址，也可以直接赋值为'*'，允许所有跨域请求</span>
+    <span class="token literal-property property">origin</span><span class="token operator">:</span><span class="token punctuation">[</span><span class="token string">'http://localhost:8080'</span><span class="token punctuation">]</span>
   <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span class="token punctuation">)</span> <span class="token comment">// 3000为服务的端口号</span>
 
@@ -179,10 +180,12 @@ io<span class="token punctuation">.</span><span class="token function">on</span>
   console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'a user connected'</span><span class="token punctuation">)</span>
 
   socket<span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">'message'</span><span class="token punctuation">,</span><span class="token parameter">message</span><span class="token operator">=></span><span class="token punctuation">&#123;</span>
-    io<span class="token punctuation">.</span><span class="token function">emit</span><span class="token punctuation">(</span><span class="token string">'message'</span><span class="token punctuation">,</span>message<span class="token punctuation">)</span> <span class="token comment">// 向所有客户端发送消息事件，包括发送消息的客户端</span>
-    socket<span class="token punctuation">.</span>broadcast<span class="token punctuation">.</span><span class="token function">emit</span><span class="token punctuation">(</span><span class="token string">'message'</span><span class="token punctuation">,</span>message<span class="token punctuation">)</span> <span class="token comment">// 向所有客户端发送消息事件，除了发送消息的客户端</span>
+    <span class="token comment">// 向所有客户端发送消息事件，包括发送消息的客户端</span>
+    io<span class="token punctuation">.</span><span class="token function">emit</span><span class="token punctuation">(</span><span class="token string">'message'</span><span class="token punctuation">,</span>message<span class="token punctuation">)</span>
+    <span class="token comment">// 向所有客户端发送消息事件，除了发送消息的客户端</span>
+    socket<span class="token punctuation">.</span>broadcast<span class="token punctuation">.</span><span class="token function">emit</span><span class="token punctuation">(</span><span class="token string">'message'</span><span class="token punctuation">,</span>message<span class="token punctuation">)</span>
   <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h3 id="client"><a href="#client" class="headerlink" title="client"></a>client</h3><p><strong>安装</strong></p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">npm</span> i socket.io-client<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
@@ -224,7 +227,8 @@ socket<span class="token punctuation">.</span><span class="token function">emit<
 <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><strong>client</strong></p>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js">socket<span class="token punctuation">.</span><span class="token function">emit</span><span class="token punctuation">(</span><span class="token string">'message'</span><span class="token punctuation">,</span> message<span class="token punctuation">,</span> room<span class="token punctuation">)</span> <span class="token comment">// room为消息发送对象的socket.id</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token comment">// room为消息发送对象的socket.id</span>
+socket<span class="token punctuation">.</span><span class="token function">emit</span><span class="token punctuation">(</span><span class="token string">'message'</span><span class="token punctuation">,</span> message<span class="token punctuation">,</span> room<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <h3 id="join"><a href="#join" class="headerlink" title="join()"></a>join()</h3><p>将用户加入 room 中,每个用户可以加入多个 room<br><strong>server</strong></p>
 <pre class="line-numbers language-js" data-language="js"><code class="language-js">io<span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">'connection'</span><span class="token punctuation">,</span> <span class="token parameter">socket</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
@@ -234,7 +238,8 @@ socket<span class="token punctuation">.</span><span class="token function">emit<
 <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><strong>client</strong></p>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js">socket<span class="token punctuation">.</span><span class="token function">emit</span><span class="token punctuation">(</span><span class="token string">'join room'</span><span class="token punctuation">,</span> room<span class="token punctuation">)</span> <span class="token comment">// room为消息发送对象的socket.id</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token comment">// room为消息发送对象的socket.id</span>
+socket<span class="token punctuation">.</span><span class="token function">emit</span><span class="token punctuation">(</span><span class="token string">'join room'</span><span class="token punctuation">,</span> room<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <h3 id="Namespace"><a href="#Namespace" class="headerlink" title="Namespace"></a>Namespace</h3><p><strong>server</strong></p>
 <pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">const</span> io <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'scoket.io'</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token number">3000</span>，<span class="token punctuation">&#123;</span>
@@ -297,7 +302,8 @@ userSocket<span class="token punctuation">.</span><span class="token function">o
 <div class="post-note note-warning"><p>安装完成后需要重启服务端</p></div>
 
 <pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">const</span> <span class="token punctuation">&#123;</span> instrument <span class="token punctuation">&#125;</span> <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'@socket.io/admin-ui'</span><span class="token punctuation">)</span>
-<span class="token function">instrument</span><span class="token punctuation">(</span>io<span class="token punctuation">,</span> <span class="token punctuation">&#123;</span> <span class="token literal-property property">auth</span><span class="token operator">:</span> <span class="token boolean">false</span> <span class="token punctuation">&#125;</span><span class="token punctuation">)</span> <span class="token comment">//传入io实例和相关配置参数,auth为false时不需要账号密码</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<span class="token comment">//传入io实例和相关配置参数,auth为false时不需要账号密码</span>
+<span class="token function">instrument</span><span class="token punctuation">(</span>io<span class="token punctuation">,</span> <span class="token punctuation">&#123;</span> <span class="token literal-property property">auth</span><span class="token operator">:</span> <span class="token boolean">false</span> <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p>在浏览器打开<code>https://admin.socket.io/</code></p>
 <div class="post-note note-warning"><p>需要在服务端进行配置,允许该地址的跨域请求</p></div>
@@ -435,23 +441,23 @@ userSocket<span class="token punctuation">.</span><span class="token function">o
   <div class="tags-header"><i class="iconfont icon-biaoqian" style="padding-right: 2px;"></i>hot tags</div>
   <div class="tags-list">
     
-    <a href="\tags\git" title="git"><div class="tags-list-item">git</div></a>
-    
-    <a href="\tags\hexo" title="hexo"><div class="tags-list-item">hexo</div></a>
-    
-    <a href="\tags\express" title="express"><div class="tags-list-item">express</div></a>
-    
     <a href="\tags\模板" title="模板"><div class="tags-list-item">模板</div></a>
     
-    <a href="\tags\koa" title="koa"><div class="tags-list-item">koa</div></a>
-    
-    <a href="\tags\eslint" title="eslint"><div class="tags-list-item">eslint</div></a>
-    
-    <a href="\tags\原理" title="原理"><div class="tags-list-item">原理</div></a>
+    <a href="\tags\vue3" title="vue3"><div class="tags-list-item">vue3</div></a>
     
     <a href="\tags\npm" title="npm"><div class="tags-list-item">npm</div></a>
     
-    <a href="\tags\vue3" title="vue3"><div class="tags-list-item">vue3</div></a>
+    <a href="\tags\原理" title="原理"><div class="tags-list-item">原理</div></a>
+    
+    <a href="\tags\eslint" title="eslint"><div class="tags-list-item">eslint</div></a>
+    
+    <a href="\tags\koa" title="koa"><div class="tags-list-item">koa</div></a>
+    
+    <a href="\tags\express" title="express"><div class="tags-list-item">express</div></a>
+    
+    <a href="\tags\hexo" title="hexo"><div class="tags-list-item">hexo</div></a>
+    
+    <a href="\tags\git" title="git"><div class="tags-list-item">git</div></a>
     
   </div>
 </div>
