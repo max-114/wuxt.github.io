@@ -159,18 +159,23 @@
     
     
     <span class="dot"></span>
-    <span>191 words</span>
+    <span>339 words</span>
     
   </div>
   
   </header>
   <div id="section" class="post-content">
-    <h3 id="React事件"><a href="#React事件" class="headerlink" title="React事件"></a>React事件</h3><h4 id="事件委托"><a href="#事件委托" class="headerlink" title="事件委托"></a>事件委托</h4><p>React并未将事件处理函数与对应的DOM节点直接关联，而是采用事件代理的模式，即所有事件最后都被委托到document这个顶级DOM上</p>
+    <h3 id="React-事件"><a href="#React-事件" class="headerlink" title="React 事件"></a>React 事件</h3><h4 id="事件委托"><a href="#事件委托" class="headerlink" title="事件委托"></a>事件委托</h4><p>React 并未将事件处理函数与对应的 DOM 节点直接关联，而是采用事件代理的模式，即所有事件最后都被委托到 document 这个顶级 DOM 上</p>
 <p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/165089379">React 事件 | 1. React 中的事件委托 - 知乎 (zhihu.com)</a></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_48786946/article/details/106877466">react组件事件代理的原理_小北lulu的博客-CSDN博客_react事件代理原理</a></p>
-<h4 id="Event对象"><a href="#Event对象" class="headerlink" title="Event对象"></a>Event对象</h4><p>和普通浏览器一样，事件handler会被自动传入一个<code>event</code>对象，这个对象和普通的浏览器 <code>event</code>对象所包含的方法和属性都基本一致</p>
-<p>不同的是 React中的<code>event</code>对象并不是浏览器提供的，而是它自己内部所构建的</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_48786946/article/details/106877466">react 组件事件代理的原理_小北 lulu 的博客-CSDN 博客_react 事件代理原理</a></p>
+<h4 id="Event-对象"><a href="#Event-对象" class="headerlink" title="Event 对象"></a>Event 对象</h4><p>和普通浏览器一样，事件 handler 会被自动传入一个<code>event</code>对象，这个对象和普通的浏览器 <code>event</code>对象所包含的方法和属性都基本一致</p>
+<p>不同的是 React 中的<code>event</code>对象并不是浏览器提供的，而是它自己内部所构建的</p>
 <p>它同样具有<code>event.stopPropagation</code>、<code>event.preventDefault</code>这种常用的方法</p>
+<h3 id="setState"><a href="#setState" class="headerlink" title="setState"></a>setState</h3><p><strong>批处理</strong>：React 会尝试将同一上下文中触发的更新合并为一个更新</p>
+<h4 id="v18-以前"><a href="#v18-以前" class="headerlink" title="v18 以前"></a>v18 以前</h4><p>半自动批处理：只对同步流程中的 this.setState 进行批处理</p>
+<p>在组件生命周期或 React 合成事件中，setState 是异步执行<br>在 setTimeout 或者原生 dom 事件中，setState 是同步执行</p>
+<h4 id="v18"><a href="#v18" class="headerlink" title="v18"></a>v18</h4><p>自动批处理<br>即使在异步流程中，setState 也是异步执行</p>
+<p><a target="_blank" rel="noopener" href="https://zh-hans.reactjs.org/docs/faq-state.html#when-is-setstate-asynchronous">setState 什么时候是异步的</a><br><a target="_blank" rel="noopener" href="https://juejin.cn/post/7044719453002530824">React setState 同步异步问题</a><br><a target="_blank" rel="noopener" href="https://juejin.cn/post/7001668009597075470">React–setState 同步与异步更新</a><br><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzkzMjIxNTcyMA==&mid=2247486748&idx=1&sn=ba0adef0b86ae9319296ef35e8ccc4a8&chksm=c25e63dbf529eacd64e8ea3f70c7cee6cb19f73158aaaeac4664201ffc7b2e16abc3a3ccbd03&mpshare=1&scene=23&srcid=0621BuiwenjRBziuH1elEqAB&sharer_sharetime=1624229035634&sharer_shareid=531f2279a3135e83a11865d30e8ffb51#rd">React18 新特性：Automatic batching</a></p>
 
   </div>
   <div>
@@ -208,7 +213,7 @@
 
 <div class="card card-content toc-card" id="mobiletoc">
   <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>TOC</div>
-<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#React%E4%BA%8B%E4%BB%B6"><span class="toc-text">React事件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98"><span class="toc-text">事件委托</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Event%E5%AF%B9%E8%B1%A1"><span class="toc-text">Event对象</span></a></li></ol></li></ol>
+<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#React-%E4%BA%8B%E4%BB%B6"><span class="toc-text">React 事件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98"><span class="toc-text">事件委托</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Event-%E5%AF%B9%E8%B1%A1"><span class="toc-text">Event 对象</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#setState"><span class="toc-text">setState</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#v18-%E4%BB%A5%E5%89%8D"><span class="toc-text">v18 以前</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#v18"><span class="toc-text">v18</span></a></li></ol></li></ol>
 </div></main>
           <aside class="left-column">
             
@@ -241,7 +246,7 @@
   <article class="display-when-two-columns spacer">
     <div class="card card-content toc-card">
       <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>TOC</div>
-<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#React%E4%BA%8B%E4%BB%B6"><span class="toc-text">React事件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98"><span class="toc-text">事件委托</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Event%E5%AF%B9%E8%B1%A1"><span class="toc-text">Event对象</span></a></li></ol></li></ol>
+<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#React-%E4%BA%8B%E4%BB%B6"><span class="toc-text">React 事件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98"><span class="toc-text">事件委托</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Event-%E5%AF%B9%E8%B1%A1"><span class="toc-text">Event 对象</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#setState"><span class="toc-text">setState</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#v18-%E4%BB%A5%E5%89%8D"><span class="toc-text">v18 以前</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#v18"><span class="toc-text">v18</span></a></li></ol></li></ol>
     </div>
   </article>
   
@@ -323,27 +328,27 @@
   <div class="tags-header"><i class="iconfont icon-biaoqian" style="padding-right: 2px;"></i>hot tags</div>
   <div class="tags-list">
     
-    <a href="\tags\git" title="git"><div class="tags-list-item">git</div></a>
-    
-    <a href="\tags\hexo" title="hexo"><div class="tags-list-item">hexo</div></a>
-    
-    <a href="\tags\express" title="express"><div class="tags-list-item">express</div></a>
-    
     <a href="\tags\模板" title="模板"><div class="tags-list-item">模板</div></a>
     
-    <a href="\tags\koa" title="koa"><div class="tags-list-item">koa</div></a>
-    
-    <a href="\tags\eslint" title="eslint"><div class="tags-list-item">eslint</div></a>
-    
-    <a href="\tags\原理" title="原理"><div class="tags-list-item">原理</div></a>
-    
-    <a href="\tags\npm" title="npm"><div class="tags-list-item">npm</div></a>
-    
-    <a href="\tags\vue3" title="vue3"><div class="tags-list-item">vue3</div></a>
+    <a href="\tags\axios" title="axios"><div class="tags-list-item">axios</div></a>
     
     <a href="\tags\react" title="react"><div class="tags-list-item">react</div></a>
     
-    <a href="\tags\axios" title="axios"><div class="tags-list-item">axios</div></a>
+    <a href="\tags\vue3" title="vue3"><div class="tags-list-item">vue3</div></a>
+    
+    <a href="\tags\npm" title="npm"><div class="tags-list-item">npm</div></a>
+    
+    <a href="\tags\原理" title="原理"><div class="tags-list-item">原理</div></a>
+    
+    <a href="\tags\eslint" title="eslint"><div class="tags-list-item">eslint</div></a>
+    
+    <a href="\tags\koa" title="koa"><div class="tags-list-item">koa</div></a>
+    
+    <a href="\tags\express" title="express"><div class="tags-list-item">express</div></a>
+    
+    <a href="\tags\hexo" title="hexo"><div class="tags-list-item">hexo</div></a>
+    
+    <a href="\tags\git" title="git"><div class="tags-list-item">git</div></a>
     
   </div>
 </div>
@@ -358,7 +363,7 @@
   
   <article class="card card-content toc-card">
     <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>TOC</div>
-<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#React%E4%BA%8B%E4%BB%B6"><span class="toc-text">React事件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98"><span class="toc-text">事件委托</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Event%E5%AF%B9%E8%B1%A1"><span class="toc-text">Event对象</span></a></li></ol></li></ol>
+<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#React-%E4%BA%8B%E4%BB%B6"><span class="toc-text">React 事件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98"><span class="toc-text">事件委托</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Event-%E5%AF%B9%E8%B1%A1"><span class="toc-text">Event 对象</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#setState"><span class="toc-text">setState</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#v18-%E4%BB%A5%E5%89%8D"><span class="toc-text">v18 以前</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#v18"><span class="toc-text">v18</span></a></li></ol></li></ol>
   </article>
   
   
