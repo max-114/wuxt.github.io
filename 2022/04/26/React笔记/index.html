@@ -159,23 +159,332 @@
     
     
     <span class="dot"></span>
-    <span>339 words</span>
+    <span>1.7k words</span>
     
   </div>
   
   </header>
   <div id="section" class="post-content">
-    <h3 id="React-事件"><a href="#React-事件" class="headerlink" title="React 事件"></a>React 事件</h3><h4 id="事件委托"><a href="#事件委托" class="headerlink" title="事件委托"></a>事件委托</h4><p>React 并未将事件处理函数与对应的 DOM 节点直接关联，而是采用事件代理的模式，即所有事件最后都被委托到 document 这个顶级 DOM 上</p>
+    <h2 id="React-事件"><a href="#React-事件" class="headerlink" title="React 事件"></a>React 事件</h2><h3 id="事件委托"><a href="#事件委托" class="headerlink" title="事件委托"></a>事件委托</h3><p>React 并未将事件处理函数与对应的 DOM 节点直接关联，而是采用事件代理的模式，即所有事件最后都被委托到 document 这个顶级 DOM 上</p>
 <p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/165089379">React 事件 | 1. React 中的事件委托 - 知乎 (zhihu.com)</a></p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_48786946/article/details/106877466">react 组件事件代理的原理_小北 lulu 的博客-CSDN 博客_react 事件代理原理</a></p>
-<h4 id="Event-对象"><a href="#Event-对象" class="headerlink" title="Event 对象"></a>Event 对象</h4><p>和普通浏览器一样，事件 handler 会被自动传入一个<code>event</code>对象，这个对象和普通的浏览器 <code>event</code>对象所包含的方法和属性都基本一致</p>
+<h3 id="Event-对象"><a href="#Event-对象" class="headerlink" title="Event 对象"></a>Event 对象</h3><p>和普通浏览器一样，事件 handler 会被自动传入一个<code>event</code>对象，这个对象和普通的浏览器 <code>event</code>对象所包含的方法和属性都基本一致</p>
 <p>不同的是 React 中的<code>event</code>对象并不是浏览器提供的，而是它自己内部所构建的</p>
 <p>它同样具有<code>event.stopPropagation</code>、<code>event.preventDefault</code>这种常用的方法</p>
-<h3 id="setState"><a href="#setState" class="headerlink" title="setState"></a>setState</h3><p><strong>批处理</strong>：React 会尝试将同一上下文中触发的更新合并为一个更新</p>
-<h4 id="v18-以前"><a href="#v18-以前" class="headerlink" title="v18 以前"></a>v18 以前</h4><p>半自动批处理：只对同步流程中的 this.setState 进行批处理</p>
+<h2 id="setState"><a href="#setState" class="headerlink" title="setState"></a>setState</h2><p><strong>批处理</strong>：React 会尝试将同一上下文中触发的更新合并为一个更新</p>
+<h3 id="v18-以前"><a href="#v18-以前" class="headerlink" title="v18 以前"></a>v18 以前</h3><p>半自动批处理：只对同步流程中的 this.setState 进行批处理</p>
 <p>在组件生命周期或 React 合成事件中，setState 是异步执行<br>在 setTimeout 或者原生 dom 事件中，setState 是同步执行</p>
-<h4 id="v18"><a href="#v18" class="headerlink" title="v18"></a>v18</h4><p>自动批处理<br>即使在异步流程中，setState 也是异步执行</p>
+<h3 id="v18"><a href="#v18" class="headerlink" title="v18"></a>v18</h3><p>自动批处理<br>即使在异步流程中，setState 也是异步执行</p>
 <p><a target="_blank" rel="noopener" href="https://zh-hans.reactjs.org/docs/faq-state.html#when-is-setstate-asynchronous">setState 什么时候是异步的</a><br><a target="_blank" rel="noopener" href="https://juejin.cn/post/7044719453002530824">React setState 同步异步问题</a><br><a target="_blank" rel="noopener" href="https://juejin.cn/post/7001668009597075470">React–setState 同步与异步更新</a><br><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzkzMjIxNTcyMA==&mid=2247486748&idx=1&sn=ba0adef0b86ae9319296ef35e8ccc4a8&chksm=c25e63dbf529eacd64e8ea3f70c7cee6cb19f73158aaaeac4664201ffc7b2e16abc3a3ccbd03&mpshare=1&scene=23&srcid=0621BuiwenjRBziuH1elEqAB&sharer_sharetime=1624229035634&sharer_shareid=531f2279a3135e83a11865d30e8ffb51#rd">React18 新特性：Automatic batching</a></p>
+<h2 id="受控组件和非受控组件"><a href="#受控组件和非受控组件" class="headerlink" title="受控组件和非受控组件"></a>受控组件和非受控组件</h2><p><strong>受控组件</strong>：react 组件的数据渲染被调用者传递的<code>props</code>完全控制，输入的值始终由 React 的<code>state</code>驱动</p>
+<p>反之则为<strong>非受控组件</strong></p>
+<p><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903629493633038">React 之受控组件和非受控组件 - 掘金 (juejin.cn)</a></p>
+<h2 id="组件通信"><a href="#组件通信" class="headerlink" title="组件通信"></a>组件通信</h2><h3 id="父子组件通信"><a href="#父子组件通信" class="headerlink" title="父子组件通信"></a>父子组件通信</h3><p><strong>父传子</strong>：属性<code>props</code></p>
+<p><strong>子传父</strong>：回调函数<code>callback</code>，父组件定义回调函数并传递给子组件，子组件调用时可以在回调函数中向父组件传递参数</p>
+<p><strong>子组件</strong></p>
+<pre class="line-numbers language-react" data-language="react"><code class="language-react">class Field extends Component &#123;
+  render() &#123;
+    return (
+      &lt;div&gt;
+        &lt;label&gt;&#123;this.props.label&#125;&lt;&#x2F;label&gt;
+        &lt;input
+          type&#x3D;&#123;this.props.type&#125;
+          value&#x3D;&#123;this.props.value&#125;
+          onChange&#x3D;&#123;e &#x3D;&gt; &#123;
+            this.props.onChange(e.target.value)
+          &#125;&#125;
+        &#x2F;&gt;
+      &lt;&#x2F;div&gt;
+    )
+  &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>父组件</strong></p>
+<pre class="line-numbers language-react" data-language="react"><code class="language-react">import React, &#123; Component &#125; from &#39;react&#39;
+export default class App extends Component &#123;
+  state &#x3D; &#123;
+    username: &#39;&#39;,
+    password: &#39;&#39;
+  &#125;
+  render() &#123;
+    return (
+      &lt;div&gt;
+        &lt;Field
+          label&#x3D;&quot;用户名&quot;
+          type&#x3D;&quot;text&quot;
+          value&#x3D;&#123;this.state.username&#125;
+          onChange&#x3D;&#123;value &#x3D;&gt; &#123;
+            this.setState(&#123;
+              username: value
+            &#125;)
+          &#125;&#125;
+        &#x2F;&gt;
+        &lt;button
+          onClick&#x3D;&#123;() &#x3D;&gt; &#123;
+            console.log(this.state.username)
+          &#125;&#125;
+        &gt;login&lt;&#x2F;button&gt;
+        &lt;button
+          onClick&#x3D;&#123;() &#x3D;&gt; &#123;
+            this.setState(&#123;
+              username: &#39;&#39;
+            &#125;)
+          &#125;&#125;
+        &gt;reset&lt;&#x2F;button&gt;
+      &lt;&#x2F;div&gt;
+    )
+  &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="非父子组件通信"><a href="#非父子组件通信" class="headerlink" title="非父子组件通信"></a>非父子组件通信</h3><h4 id="状态提升-中间人模式"><a href="#状态提升-中间人模式" class="headerlink" title="状态提升(中间人模式)"></a>状态提升(中间人模式)</h4><p>React中的状态提升概括来说,就是将多个组件需要共享的状态提升到它们最近的父组件上，在父组件上改变这个状态然后通过<code>props</code>分发给子组件</p>
+<p><strong>子组件</strong></p>
+<pre class="line-numbers language-react" data-language="react"><code class="language-react">class FilmItem extends Component &#123;
+  render() &#123;
+    const &#123; name, poster, grade, synopsis, onEvent &#125; &#x3D; this.props
+    return (
+      &lt;div
+        className&#x3D;&quot;filmitem&quot;
+        onClick&#x3D;&#123;() &#x3D;&gt; &#123;
+          onEvent(synopsis)
+        &#125;&#125;
+      &gt;
+        &lt;img src&#x3D;&#123;poster&#125; alt&#x3D;&quot;poster&quot; &#x2F;&gt;
+        &lt;h4&gt;&#123;name&#125;&lt;&#x2F;h4&gt;
+        &lt;div&gt;观众评分：&#123;grade&#125;&lt;&#x2F;div&gt;
+      &lt;&#x2F;div&gt;
+    )
+  &#125;
+&#125;
+
+class FilmDetail extends Component &#123;
+  render() &#123;
+    return &lt;div className&#x3D;&quot;filmdetail&quot;&gt;&#123;this.props.synopsis&#125;&lt;&#x2F;div&gt;
+  &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>父组件</strong></p>
+<pre class="line-numbers language-react" data-language="react"><code class="language-react">&#x2F;&#x2F; @ts-nocheck
+import React, &#123; Component &#125; from &#39;react&#39;
+import axios from &#39;axios&#39;
+
+export default class App extends Component &#123;
+  constructor() &#123;
+    super()
+    this.state &#x3D; &#123;
+      filmList: [],
+      synopsis: &#39;&#39;
+    &#125;
+    axios.get(&#39;&#x2F;test.json&#39;).then(res &#x3D;&gt; &#123;
+      this.setState(&#123;
+        filmList: res.data.data.films
+      &#125;)
+    &#125;)
+  &#125;
+  render() &#123;
+    return (
+      &lt;div&gt;
+        &#123;this.state.filmList.map(item &#x3D;&gt; (
+          &lt;FilmItem
+            key&#x3D;&#123;item.filmId&#125;
+            &#123;...item&#125;
+            onEvent&#x3D;&#123;value &#x3D;&gt; &#123;
+              this.setState(&#123;
+                synopsis: value
+              &#125;)
+            &#125;&#125;
+          &gt;&lt;&#x2F;FilmItem&gt;
+        ))&#125;
+        &lt;FilmDetail synopsis&#x3D;&#123;this.state.synopsis&#125;&gt;&lt;&#x2F;FilmDetail&gt;
+      &lt;&#x2F;div&gt;
+    )
+  &#125;
+&#125;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="发布订阅模式实现"><a href="#发布订阅模式实现" class="headerlink" title="发布订阅模式实现"></a>发布订阅模式实现</h4><pre class="line-numbers language-react" data-language="react"><code class="language-react">&#x2F;&#x2F; @ts-nocheck
+import React, &#123; Component &#125; from &#39;react&#39;
+import axios from &#39;axios&#39;
+import &#39;.&#x2F;style&#x2F;index.css&#39;
+
+const bus &#x3D; &#123;
+  list: [],
+  subscribe(callback) &#123;
+    this.list.push(callback)
+  &#125;,
+  publish(text) &#123;
+    this.list.forEach(callback &#x3D;&gt; &#123;
+      callback &amp;&amp; callback(text)
+    &#125;)
+  &#125;
+&#125;
+
+class FilmItem extends Component &#123;
+  render() &#123;
+    const &#123; name, poster, grade, synopsis &#125; &#x3D; this.props
+    return (
+      &lt;div
+        className&#x3D;&quot;filmitem&quot;
+        onClick&#x3D;&#123;() &#x3D;&gt; &#123;
+          bus.publish(synopsis)
+        &#125;&#125;
+      &gt;
+        &lt;img src&#x3D;&#123;poster&#125; alt&#x3D;&quot;poster&quot; &#x2F;&gt;
+        &lt;h4&gt;&#123;name&#125;&lt;&#x2F;h4&gt;
+        &lt;div&gt;观众评分：&#123;grade&#125;&lt;&#x2F;div&gt;
+      &lt;&#x2F;div&gt;
+    )
+  &#125;
+&#125;
+
+class FilmDetail extends Component &#123;
+  state &#x3D; &#123;
+    synopsis: &#39;&#39;
+  &#125;
+  constructor() &#123;
+    super()
+    bus.subscribe(value &#x3D;&gt; &#123;
+      this.setState(&#123;
+        synopsis: value
+      &#125;)
+    &#125;)
+  &#125;
+  render() &#123;
+    return &lt;div className&#x3D;&quot;filmdetail&quot;&gt;&#123;this.state.synopsis&#125;&lt;&#x2F;div&gt;
+  &#125;
+&#125;
+
+export default class App extends Component &#123;
+  constructor() &#123;
+    super()
+    this.state &#x3D; &#123;
+      filmList: []
+    &#125;
+    axios.get(&#39;&#x2F;test.json&#39;).then(res &#x3D;&gt; &#123;
+      this.setState(&#123;
+        filmList: res.data.data.films
+      &#125;)
+    &#125;)
+  &#125;
+  render() &#123;
+    return (
+      &lt;div&gt;
+        &#123;this.state.filmList.map(item &#x3D;&gt; (
+          &lt;FilmItem key&#x3D;&#123;item.filmId&#125; &#123;...item&#125;&gt;&lt;&#x2F;FilmItem&gt;
+        ))&#125;
+        &lt;FilmDetail&gt;&lt;&#x2F;FilmDetail&gt;
+      &lt;&#x2F;div&gt;
+    )
+  &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="context状态数传参"><a href="#context状态数传参" class="headerlink" title="context状态数传参"></a>context状态数传参</h4><pre class="line-numbers language-react" data-language="react"><code class="language-react">&#x2F;&#x2F; @ts-nocheck
+import React, &#123; Component &#125; from &#39;react&#39;
+import axios from &#39;axios&#39;
+import &#39;.&#x2F;style&#x2F;index.css&#39;
+
+const GlobalCotext &#x3D; React.createContext()
+class FilmItem extends Component &#123;
+  render() &#123;
+    const &#123; name, poster, grade, synopsis &#125; &#x3D; this.props
+    return (
+      &lt;GlobalCotext.Consumer&gt;
+        &#123;value &#x3D;&gt; &#123;
+          return (
+            &lt;div
+              className&#x3D;&quot;filmitem&quot;
+              onClick&#x3D;&#123;() &#x3D;&gt; &#123;
+                value.changeInfo(synopsis)
+              &#125;&#125;
+            &gt;
+              &lt;img src&#x3D;&#123;poster&#125; alt&#x3D;&quot;poster&quot; &#x2F;&gt;
+              &lt;h4&gt;&#123;name&#125;&lt;&#x2F;h4&gt;
+              &lt;div&gt;观众评分：&#123;grade&#125;&lt;&#x2F;div&gt;
+            &lt;&#x2F;div&gt;
+          )
+        &#125;&#125;
+      &lt;&#x2F;GlobalCotext.Consumer&gt;
+    )
+  &#125;
+&#125;
+
+class FilmDetail extends Component &#123;
+  render() &#123;
+    return (
+      &lt;GlobalCotext.Consumer&gt;
+        &#123;value &#x3D;&gt; &lt;div className&#x3D;&quot;filmdetail&quot;&gt;&#123;value.info&#125;&lt;&#x2F;div&gt;&#125;
+      &lt;&#x2F;GlobalCotext.Consumer&gt;
+    )
+  &#125;
+&#125;
+
+export default class App extends Component &#123;
+  constructor() &#123;
+    super()
+    this.state &#x3D; &#123;
+      filmList: [],
+      info: &#39;&#39;
+    &#125;
+    axios.get(&#39;&#x2F;test.json&#39;).then(res &#x3D;&gt; &#123;
+      this.setState(&#123;
+        filmList: res.data.data.films
+      &#125;)
+    &#125;)
+  &#125;
+  render() &#123;
+    return (
+      &lt;GlobalCotext.Provider
+        value&#x3D;&#123;&#123;
+          info: this.state.info,
+          changeInfo: val &#x3D;&gt; &#123;
+            this.setState(&#123;
+              info: val
+            &#125;)
+          &#125;
+        &#125;&#125;
+      &gt;
+        &lt;div&gt;
+          &#123;this.state.filmList.map(item &#x3D;&gt; (
+            &lt;FilmItem key&#x3D;&#123;item.filmId&#125; &#123;...item&#125;&gt;&lt;&#x2F;FilmItem&gt;
+          ))&#125;
+          &lt;FilmDetail&gt;&lt;&#x2F;FilmDetail&gt;
+        &lt;&#x2F;div&gt;
+      &lt;&#x2F;GlobalCotext.Provider&gt;
+    )
+  &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="插槽"><a href="#插槽" class="headerlink" title="插槽"></a>插槽</h2><p>通过<code>this.props.children</code>访问插槽内容</p>
+<p><code>this.props.children</code>是一个数组，可以利用下标将内容分别插入组件的不同部分</p>
+<pre class="line-numbers language-react" data-language="react"><code class="language-react">import React, &#123; Component &#125; from &#39;react&#39;
+
+class Child extends Component &#123;
+  render() &#123;
+    return (
+      &lt;div&gt;
+        &lt;div&gt;child&lt;&#x2F;div&gt;
+        &#123;this.props.children[0]&#125;  &#123;&#x2F;* &lt;div&gt;1111111111&lt;&#x2F;div&gt; *&#x2F;&#125;
+        &#123;this.props.children[1]&#125;  &#123;&#x2F;* &lt;div&gt;2222222222&lt;&#x2F;div&gt; *&#x2F;&#125;
+        &#123;this.props.children[2]&#125;  &#123;&#x2F;* &lt;div&gt;3333333333&lt;&#x2F;div&gt; *&#x2F;&#125;
+      &lt;&#x2F;div&gt;
+    )
+  &#125;
+&#125;
+
+export default class App extends Component &#123;
+  render() &#123;
+    return (
+      &lt;div&gt;
+        &lt;Child&gt;
+          &lt;div&gt;1111111111&lt;&#x2F;div&gt;
+          &lt;div&gt;2222222222&lt;&#x2F;div&gt;
+          &lt;div&gt;3333333333&lt;&#x2F;div&gt;
+        &lt;&#x2F;Child&gt;
+      &lt;&#x2F;div&gt;
+    )
+  &#125;
+&#125;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 
   </div>
   <div>
@@ -213,7 +522,7 @@
 
 <div class="card card-content toc-card" id="mobiletoc">
   <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>TOC</div>
-<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#React-%E4%BA%8B%E4%BB%B6"><span class="toc-text">React 事件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98"><span class="toc-text">事件委托</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Event-%E5%AF%B9%E8%B1%A1"><span class="toc-text">Event 对象</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#setState"><span class="toc-text">setState</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#v18-%E4%BB%A5%E5%89%8D"><span class="toc-text">v18 以前</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#v18"><span class="toc-text">v18</span></a></li></ol></li></ol>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#React-%E4%BA%8B%E4%BB%B6"><span class="toc-text">React 事件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98"><span class="toc-text">事件委托</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Event-%E5%AF%B9%E8%B1%A1"><span class="toc-text">Event 对象</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#setState"><span class="toc-text">setState</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#v18-%E4%BB%A5%E5%89%8D"><span class="toc-text">v18 以前</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#v18"><span class="toc-text">v18</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%97%E6%8E%A7%E7%BB%84%E4%BB%B6%E5%92%8C%E9%9D%9E%E5%8F%97%E6%8E%A7%E7%BB%84%E4%BB%B6"><span class="toc-text">受控组件和非受控组件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1"><span class="toc-text">组件通信</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%88%B6%E5%AD%90%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1"><span class="toc-text">父子组件通信</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%9E%E7%88%B6%E5%AD%90%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1"><span class="toc-text">非父子组件通信</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%8A%B6%E6%80%81%E6%8F%90%E5%8D%87-%E4%B8%AD%E9%97%B4%E4%BA%BA%E6%A8%A1%E5%BC%8F"><span class="toc-text">状态提升(中间人模式)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%E6%A8%A1%E5%BC%8F%E5%AE%9E%E7%8E%B0"><span class="toc-text">发布订阅模式实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#context%E7%8A%B6%E6%80%81%E6%95%B0%E4%BC%A0%E5%8F%82"><span class="toc-text">context状态数传参</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%92%E6%A7%BD"><span class="toc-text">插槽</span></a></li></ol>
 </div></main>
           <aside class="left-column">
             
@@ -246,7 +555,7 @@
   <article class="display-when-two-columns spacer">
     <div class="card card-content toc-card">
       <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>TOC</div>
-<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#React-%E4%BA%8B%E4%BB%B6"><span class="toc-text">React 事件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98"><span class="toc-text">事件委托</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Event-%E5%AF%B9%E8%B1%A1"><span class="toc-text">Event 对象</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#setState"><span class="toc-text">setState</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#v18-%E4%BB%A5%E5%89%8D"><span class="toc-text">v18 以前</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#v18"><span class="toc-text">v18</span></a></li></ol></li></ol>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#React-%E4%BA%8B%E4%BB%B6"><span class="toc-text">React 事件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98"><span class="toc-text">事件委托</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Event-%E5%AF%B9%E8%B1%A1"><span class="toc-text">Event 对象</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#setState"><span class="toc-text">setState</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#v18-%E4%BB%A5%E5%89%8D"><span class="toc-text">v18 以前</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#v18"><span class="toc-text">v18</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%97%E6%8E%A7%E7%BB%84%E4%BB%B6%E5%92%8C%E9%9D%9E%E5%8F%97%E6%8E%A7%E7%BB%84%E4%BB%B6"><span class="toc-text">受控组件和非受控组件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1"><span class="toc-text">组件通信</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%88%B6%E5%AD%90%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1"><span class="toc-text">父子组件通信</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%9E%E7%88%B6%E5%AD%90%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1"><span class="toc-text">非父子组件通信</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%8A%B6%E6%80%81%E6%8F%90%E5%8D%87-%E4%B8%AD%E9%97%B4%E4%BA%BA%E6%A8%A1%E5%BC%8F"><span class="toc-text">状态提升(中间人模式)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%E6%A8%A1%E5%BC%8F%E5%AE%9E%E7%8E%B0"><span class="toc-text">发布订阅模式实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#context%E7%8A%B6%E6%80%81%E6%95%B0%E4%BC%A0%E5%8F%82"><span class="toc-text">context状态数传参</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%92%E6%A7%BD"><span class="toc-text">插槽</span></a></li></ol>
     </div>
   </article>
   
@@ -363,7 +672,7 @@
   
   <article class="card card-content toc-card">
     <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>TOC</div>
-<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#React-%E4%BA%8B%E4%BB%B6"><span class="toc-text">React 事件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98"><span class="toc-text">事件委托</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Event-%E5%AF%B9%E8%B1%A1"><span class="toc-text">Event 对象</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#setState"><span class="toc-text">setState</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#v18-%E4%BB%A5%E5%89%8D"><span class="toc-text">v18 以前</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#v18"><span class="toc-text">v18</span></a></li></ol></li></ol>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#React-%E4%BA%8B%E4%BB%B6"><span class="toc-text">React 事件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98"><span class="toc-text">事件委托</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Event-%E5%AF%B9%E8%B1%A1"><span class="toc-text">Event 对象</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#setState"><span class="toc-text">setState</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#v18-%E4%BB%A5%E5%89%8D"><span class="toc-text">v18 以前</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#v18"><span class="toc-text">v18</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%97%E6%8E%A7%E7%BB%84%E4%BB%B6%E5%92%8C%E9%9D%9E%E5%8F%97%E6%8E%A7%E7%BB%84%E4%BB%B6"><span class="toc-text">受控组件和非受控组件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1"><span class="toc-text">组件通信</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%88%B6%E5%AD%90%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1"><span class="toc-text">父子组件通信</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%9E%E7%88%B6%E5%AD%90%E7%BB%84%E4%BB%B6%E9%80%9A%E4%BF%A1"><span class="toc-text">非父子组件通信</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%8A%B6%E6%80%81%E6%8F%90%E5%8D%87-%E4%B8%AD%E9%97%B4%E4%BA%BA%E6%A8%A1%E5%BC%8F"><span class="toc-text">状态提升(中间人模式)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%E6%A8%A1%E5%BC%8F%E5%AE%9E%E7%8E%B0"><span class="toc-text">发布订阅模式实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#context%E7%8A%B6%E6%80%81%E6%95%B0%E4%BC%A0%E5%8F%82"><span class="toc-text">context状态数传参</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%92%E6%A7%BD"><span class="toc-text">插槽</span></a></li></ol>
   </article>
   
   
