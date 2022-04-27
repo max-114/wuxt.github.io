@@ -159,7 +159,7 @@
     
     
     <span class="dot"></span>
-    <span>1.7k words</span>
+    <span>1.4k words</span>
     
   </div>
   
@@ -182,307 +182,307 @@
 <h2 id="组件通信"><a href="#组件通信" class="headerlink" title="组件通信"></a>组件通信</h2><h3 id="父子组件通信"><a href="#父子组件通信" class="headerlink" title="父子组件通信"></a>父子组件通信</h3><p><strong>父传子</strong>：属性<code>props</code></p>
 <p><strong>子传父</strong>：回调函数<code>callback</code>，父组件定义回调函数并传递给子组件，子组件调用时可以在回调函数中向父组件传递参数</p>
 <p><strong>子组件</strong></p>
-<pre class="line-numbers language-react" data-language="react"><code class="language-react">class Field extends Component &#123;
-  render() &#123;
-    return (
-      &lt;div&gt;
-        &lt;label&gt;&#123;this.props.label&#125;&lt;&#x2F;label&gt;
-        &lt;input
-          type&#x3D;&#123;this.props.type&#125;
-          value&#x3D;&#123;this.props.value&#125;
-          onChange&#x3D;&#123;e &#x3D;&gt; &#123;
-            this.props.onChange(e.target.value)
-          &#125;&#125;
-        &#x2F;&gt;
-      &lt;&#x2F;div&gt;
-    )
-  &#125;
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-jsx" data-language="jsx"><code class="language-jsx"><span class="token keyword">class</span> <span class="token class-name">Field</span> <span class="token keyword">extends</span> <span class="token class-name">Component</span> <span class="token punctuation">&#123;</span>
+  <span class="token function">render</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> <span class="token punctuation">(</span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">></span></span><span class="token plain-text">
+        </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>label</span><span class="token punctuation">></span></span><span class="token punctuation">&#123;</span><span class="token keyword">this</span><span class="token punctuation">.</span>props<span class="token punctuation">.</span>label<span class="token punctuation">&#125;</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>label</span><span class="token punctuation">></span></span><span class="token plain-text">
+        </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span>
+          <span class="token attr-name">type</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">&#123;</span><span class="token keyword">this</span><span class="token punctuation">.</span>props<span class="token punctuation">.</span>type<span class="token punctuation">&#125;</span></span>
+          <span class="token attr-name">value</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">&#123;</span><span class="token keyword">this</span><span class="token punctuation">.</span>props<span class="token punctuation">.</span>value<span class="token punctuation">&#125;</span></span>
+          <span class="token attr-name">onChange</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">&#123;</span><span class="token parameter">e</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span>props<span class="token punctuation">.</span><span class="token function">onChange</span><span class="token punctuation">(</span>e<span class="token punctuation">.</span>target<span class="token punctuation">.</span>value<span class="token punctuation">)</span>
+          <span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span></span>
+        <span class="token punctuation">/></span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+    <span class="token punctuation">)</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><strong>父组件</strong></p>
-<pre class="line-numbers language-react" data-language="react"><code class="language-react">import React, &#123; Component &#125; from &#39;react&#39;
-export default class App extends Component &#123;
-  state &#x3D; &#123;
-    username: &#39;&#39;,
-    password: &#39;&#39;
-  &#125;
-  render() &#123;
-    return (
-      &lt;div&gt;
-        &lt;Field
-          label&#x3D;&quot;用户名&quot;
-          type&#x3D;&quot;text&quot;
-          value&#x3D;&#123;this.state.username&#125;
-          onChange&#x3D;&#123;value &#x3D;&gt; &#123;
-            this.setState(&#123;
-              username: value
-            &#125;)
-          &#125;&#125;
-        &#x2F;&gt;
-        &lt;button
-          onClick&#x3D;&#123;() &#x3D;&gt; &#123;
-            console.log(this.state.username)
-          &#125;&#125;
-        &gt;login&lt;&#x2F;button&gt;
-        &lt;button
-          onClick&#x3D;&#123;() &#x3D;&gt; &#123;
-            this.setState(&#123;
-              username: &#39;&#39;
-            &#125;)
-          &#125;&#125;
-        &gt;reset&lt;&#x2F;button&gt;
-      &lt;&#x2F;div&gt;
-    )
-  &#125;
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-jsx" data-language="jsx"><code class="language-jsx"><span class="token keyword">import</span> React<span class="token punctuation">,</span> <span class="token punctuation">&#123;</span> Component <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'react'</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">class</span> <span class="token class-name">App</span> <span class="token keyword">extends</span> <span class="token class-name">Component</span> <span class="token punctuation">&#123;</span>
+  state <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+    <span class="token literal-property property">username</span><span class="token operator">:</span> <span class="token string">''</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">password</span><span class="token operator">:</span> <span class="token string">''</span>
+  <span class="token punctuation">&#125;</span>
+  <span class="token function">render</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> <span class="token punctuation">(</span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">></span></span><span class="token plain-text">
+        </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Field</span></span>
+          <span class="token attr-name">label</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>用户名<span class="token punctuation">"</span></span>
+          <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>text<span class="token punctuation">"</span></span>
+          <span class="token attr-name">value</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">&#123;</span><span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">.</span>username<span class="token punctuation">&#125;</span></span>
+          <span class="token attr-name">onChange</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">&#123;</span><span class="token parameter">value</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">setState</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+              <span class="token literal-property property">username</span><span class="token operator">:</span> value
+            <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+          <span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span></span>
+        <span class="token punctuation">/></span></span><span class="token plain-text">
+        </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span>
+          <span class="token attr-name">onClick</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">&#123;</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+            console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">.</span>username<span class="token punctuation">)</span>
+          <span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span></span>
+        <span class="token punctuation">></span></span><span class="token plain-text">login</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span><span class="token plain-text">
+        </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span>
+          <span class="token attr-name">onClick</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">&#123;</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">setState</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+              <span class="token literal-property property">username</span><span class="token operator">:</span> <span class="token string">''</span>
+            <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+          <span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span></span>
+        <span class="token punctuation">></span></span><span class="token plain-text">reset</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+    <span class="token punctuation">)</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h3 id="非父子组件通信"><a href="#非父子组件通信" class="headerlink" title="非父子组件通信"></a>非父子组件通信</h3><h4 id="状态提升-中间人模式"><a href="#状态提升-中间人模式" class="headerlink" title="状态提升(中间人模式)"></a>状态提升(中间人模式)</h4><p>React中的状态提升概括来说,就是将多个组件需要共享的状态提升到它们最近的父组件上，在父组件上改变这个状态然后通过<code>props</code>分发给子组件</p>
 <p><strong>子组件</strong></p>
-<pre class="line-numbers language-react" data-language="react"><code class="language-react">class FilmItem extends Component &#123;
-  render() &#123;
-    const &#123; name, poster, grade, synopsis, onEvent &#125; &#x3D; this.props
-    return (
-      &lt;div
-        className&#x3D;&quot;filmitem&quot;
-        onClick&#x3D;&#123;() &#x3D;&gt; &#123;
-          onEvent(synopsis)
-        &#125;&#125;
-      &gt;
-        &lt;img src&#x3D;&#123;poster&#125; alt&#x3D;&quot;poster&quot; &#x2F;&gt;
-        &lt;h4&gt;&#123;name&#125;&lt;&#x2F;h4&gt;
-        &lt;div&gt;观众评分：&#123;grade&#125;&lt;&#x2F;div&gt;
-      &lt;&#x2F;div&gt;
-    )
-  &#125;
-&#125;
+<pre class="line-numbers language-jsx" data-language="jsx"><code class="language-jsx"><span class="token keyword">class</span> <span class="token class-name">FilmItem</span> <span class="token keyword">extends</span> <span class="token class-name">Component</span> <span class="token punctuation">&#123;</span>
+  <span class="token function">render</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">const</span> <span class="token punctuation">&#123;</span> name<span class="token punctuation">,</span> poster<span class="token punctuation">,</span> grade<span class="token punctuation">,</span> synopsis<span class="token punctuation">,</span> onEvent <span class="token punctuation">&#125;</span> <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>props
+    <span class="token keyword">return</span> <span class="token punctuation">(</span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span>
+        <span class="token attr-name">className</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>filmitem<span class="token punctuation">"</span></span>
+        <span class="token attr-name">onClick</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">&#123;</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+          <span class="token function">onEvent</span><span class="token punctuation">(</span>synopsis<span class="token punctuation">)</span>
+        <span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span></span>
+      <span class="token punctuation">></span></span><span class="token plain-text">
+        </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">&#123;</span>poster<span class="token punctuation">&#125;</span></span> <span class="token attr-name">alt</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>poster<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span><span class="token plain-text">
+        </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h4</span><span class="token punctuation">></span></span><span class="token punctuation">&#123;</span>name<span class="token punctuation">&#125;</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h4</span><span class="token punctuation">></span></span><span class="token plain-text">
+        </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">></span></span><span class="token plain-text">观众评分：</span><span class="token punctuation">&#123;</span>grade<span class="token punctuation">&#125;</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+    <span class="token punctuation">)</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
 
-class FilmDetail extends Component &#123;
-  render() &#123;
-    return &lt;div className&#x3D;&quot;filmdetail&quot;&gt;&#123;this.props.synopsis&#125;&lt;&#x2F;div&gt;
-  &#125;
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token keyword">class</span> <span class="token class-name">FilmDetail</span> <span class="token keyword">extends</span> <span class="token class-name">Component</span> <span class="token punctuation">&#123;</span>
+  <span class="token function">render</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">className</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>filmdetail<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token punctuation">&#123;</span><span class="token keyword">this</span><span class="token punctuation">.</span>props<span class="token punctuation">.</span>synopsis<span class="token punctuation">&#125;</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p><strong>父组件</strong></p>
-<pre class="line-numbers language-react" data-language="react"><code class="language-react">&#x2F;&#x2F; @ts-nocheck
-import React, &#123; Component &#125; from &#39;react&#39;
-import axios from &#39;axios&#39;
+<pre class="line-numbers language-jsx" data-language="jsx"><code class="language-jsx"><span class="token comment">// @ts-nocheck</span>
+<span class="token keyword">import</span> React<span class="token punctuation">,</span> <span class="token punctuation">&#123;</span> Component <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'react'</span>
+<span class="token keyword">import</span> axios <span class="token keyword">from</span> <span class="token string">'axios'</span>
 
-export default class App extends Component &#123;
-  constructor() &#123;
-    super()
-    this.state &#x3D; &#123;
-      filmList: [],
-      synopsis: &#39;&#39;
-    &#125;
-    axios.get(&#39;&#x2F;test.json&#39;).then(res &#x3D;&gt; &#123;
-      this.setState(&#123;
-        filmList: res.data.data.films
-      &#125;)
-    &#125;)
-  &#125;
-  render() &#123;
-    return (
-      &lt;div&gt;
-        &#123;this.state.filmList.map(item &#x3D;&gt; (
-          &lt;FilmItem
-            key&#x3D;&#123;item.filmId&#125;
-            &#123;...item&#125;
-            onEvent&#x3D;&#123;value &#x3D;&gt; &#123;
-              this.setState(&#123;
-                synopsis: value
-              &#125;)
-            &#125;&#125;
-          &gt;&lt;&#x2F;FilmItem&gt;
-        ))&#125;
-        &lt;FilmDetail synopsis&#x3D;&#123;this.state.synopsis&#125;&gt;&lt;&#x2F;FilmDetail&gt;
-      &lt;&#x2F;div&gt;
-    )
-  &#125;
-&#125;
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">class</span> <span class="token class-name">App</span> <span class="token keyword">extends</span> <span class="token class-name">Component</span> <span class="token punctuation">&#123;</span>
+  <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">super</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>state <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+      <span class="token literal-property property">filmList</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">synopsis</span><span class="token operator">:</span> <span class="token string">''</span>
+    <span class="token punctuation">&#125;</span>
+    axios<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">'/test.json'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token parameter">res</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">setState</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+        <span class="token literal-property property">filmList</span><span class="token operator">:</span> res<span class="token punctuation">.</span>data<span class="token punctuation">.</span>data<span class="token punctuation">.</span>films
+      <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+  <span class="token punctuation">&#125;</span>
+  <span class="token function">render</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> <span class="token punctuation">(</span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">></span></span><span class="token plain-text">
+        </span><span class="token punctuation">&#123;</span><span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">.</span>filmList<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token parameter">item</span> <span class="token operator">=></span> <span class="token punctuation">(</span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">FilmItem</span></span>
+            <span class="token attr-name">key</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">&#123;</span>item<span class="token punctuation">.</span>filmId<span class="token punctuation">&#125;</span></span>
+            <span class="token spread"><span class="token punctuation">&#123;</span><span class="token operator">...</span>item<span class="token punctuation">&#125;</span></span>
+            <span class="token attr-name">onEvent</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">&#123;</span><span class="token parameter">value</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+              <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">setState</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+                <span class="token literal-property property">synopsis</span><span class="token operator">:</span> value
+              <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+            <span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span></span>
+          <span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">FilmItem</span></span><span class="token punctuation">></span></span>
+        <span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">&#125;</span><span class="token plain-text">
+        </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">FilmDetail</span></span> <span class="token attr-name">synopsis</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">&#123;</span><span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">.</span>synopsis<span class="token punctuation">&#125;</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">FilmDetail</span></span><span class="token punctuation">></span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+    <span class="token punctuation">)</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h4 id="发布订阅模式实现"><a href="#发布订阅模式实现" class="headerlink" title="发布订阅模式实现"></a>发布订阅模式实现</h4><pre class="line-numbers language-react" data-language="react"><code class="language-react">&#x2F;&#x2F; @ts-nocheck
-import React, &#123; Component &#125; from &#39;react&#39;
-import axios from &#39;axios&#39;
-import &#39;.&#x2F;style&#x2F;index.css&#39;
+<h4 id="发布订阅模式实现"><a href="#发布订阅模式实现" class="headerlink" title="发布订阅模式实现"></a>发布订阅模式实现</h4><pre class="line-numbers language-jsx" data-language="jsx"><code class="language-jsx"><span class="token comment">// @ts-nocheck</span>
+<span class="token keyword">import</span> React<span class="token punctuation">,</span> <span class="token punctuation">&#123;</span> Component <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'react'</span>
+<span class="token keyword">import</span> axios <span class="token keyword">from</span> <span class="token string">'axios'</span>
+<span class="token keyword">import</span> <span class="token string">'./style/index.css'</span>
 
-const bus &#x3D; &#123;
-  list: [],
-  subscribe(callback) &#123;
-    this.list.push(callback)
-  &#125;,
-  publish(text) &#123;
-    this.list.forEach(callback &#x3D;&gt; &#123;
-      callback &amp;&amp; callback(text)
-    &#125;)
-  &#125;
-&#125;
+<span class="token keyword">const</span> bus <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+  <span class="token literal-property property">list</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token function">subscribe</span><span class="token punctuation">(</span><span class="token parameter">callback</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>list<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>callback<span class="token punctuation">)</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token function">publish</span><span class="token punctuation">(</span><span class="token parameter">text</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>list<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token parameter">callback</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+      callback <span class="token operator">&amp;&amp;</span> <span class="token function">callback</span><span class="token punctuation">(</span>text<span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
 
-class FilmItem extends Component &#123;
-  render() &#123;
-    const &#123; name, poster, grade, synopsis &#125; &#x3D; this.props
-    return (
-      &lt;div
-        className&#x3D;&quot;filmitem&quot;
-        onClick&#x3D;&#123;() &#x3D;&gt; &#123;
-          bus.publish(synopsis)
-        &#125;&#125;
-      &gt;
-        &lt;img src&#x3D;&#123;poster&#125; alt&#x3D;&quot;poster&quot; &#x2F;&gt;
-        &lt;h4&gt;&#123;name&#125;&lt;&#x2F;h4&gt;
-        &lt;div&gt;观众评分：&#123;grade&#125;&lt;&#x2F;div&gt;
-      &lt;&#x2F;div&gt;
-    )
-  &#125;
-&#125;
+<span class="token keyword">class</span> <span class="token class-name">FilmItem</span> <span class="token keyword">extends</span> <span class="token class-name">Component</span> <span class="token punctuation">&#123;</span>
+  <span class="token function">render</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">const</span> <span class="token punctuation">&#123;</span> name<span class="token punctuation">,</span> poster<span class="token punctuation">,</span> grade<span class="token punctuation">,</span> synopsis <span class="token punctuation">&#125;</span> <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>props
+    <span class="token keyword">return</span> <span class="token punctuation">(</span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span>
+        <span class="token attr-name">className</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>filmitem<span class="token punctuation">"</span></span>
+        <span class="token attr-name">onClick</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">&#123;</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+          bus<span class="token punctuation">.</span><span class="token function">publish</span><span class="token punctuation">(</span>synopsis<span class="token punctuation">)</span>
+        <span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span></span>
+      <span class="token punctuation">></span></span><span class="token plain-text">
+        </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">&#123;</span>poster<span class="token punctuation">&#125;</span></span> <span class="token attr-name">alt</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>poster<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span><span class="token plain-text">
+        </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h4</span><span class="token punctuation">></span></span><span class="token punctuation">&#123;</span>name<span class="token punctuation">&#125;</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h4</span><span class="token punctuation">></span></span><span class="token plain-text">
+        </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">></span></span><span class="token plain-text">观众评分：</span><span class="token punctuation">&#123;</span>grade<span class="token punctuation">&#125;</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+    <span class="token punctuation">)</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
 
-class FilmDetail extends Component &#123;
-  state &#x3D; &#123;
-    synopsis: &#39;&#39;
-  &#125;
-  constructor() &#123;
-    super()
-    bus.subscribe(value &#x3D;&gt; &#123;
-      this.setState(&#123;
-        synopsis: value
-      &#125;)
-    &#125;)
-  &#125;
-  render() &#123;
-    return &lt;div className&#x3D;&quot;filmdetail&quot;&gt;&#123;this.state.synopsis&#125;&lt;&#x2F;div&gt;
-  &#125;
-&#125;
+<span class="token keyword">class</span> <span class="token class-name">FilmDetail</span> <span class="token keyword">extends</span> <span class="token class-name">Component</span> <span class="token punctuation">&#123;</span>
+  state <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+    <span class="token literal-property property">synopsis</span><span class="token operator">:</span> <span class="token string">''</span>
+  <span class="token punctuation">&#125;</span>
+  <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">super</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    bus<span class="token punctuation">.</span><span class="token function">subscribe</span><span class="token punctuation">(</span><span class="token parameter">value</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">setState</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+        <span class="token literal-property property">synopsis</span><span class="token operator">:</span> value
+      <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+  <span class="token punctuation">&#125;</span>
+  <span class="token function">render</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">className</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>filmdetail<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token punctuation">&#123;</span><span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">.</span>synopsis<span class="token punctuation">&#125;</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
 
-export default class App extends Component &#123;
-  constructor() &#123;
-    super()
-    this.state &#x3D; &#123;
-      filmList: []
-    &#125;
-    axios.get(&#39;&#x2F;test.json&#39;).then(res &#x3D;&gt; &#123;
-      this.setState(&#123;
-        filmList: res.data.data.films
-      &#125;)
-    &#125;)
-  &#125;
-  render() &#123;
-    return (
-      &lt;div&gt;
-        &#123;this.state.filmList.map(item &#x3D;&gt; (
-          &lt;FilmItem key&#x3D;&#123;item.filmId&#125; &#123;...item&#125;&gt;&lt;&#x2F;FilmItem&gt;
-        ))&#125;
-        &lt;FilmDetail&gt;&lt;&#x2F;FilmDetail&gt;
-      &lt;&#x2F;div&gt;
-    )
-  &#125;
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">class</span> <span class="token class-name">App</span> <span class="token keyword">extends</span> <span class="token class-name">Component</span> <span class="token punctuation">&#123;</span>
+  <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">super</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>state <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+      <span class="token literal-property property">filmList</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+    <span class="token punctuation">&#125;</span>
+    axios<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">'/test.json'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token parameter">res</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">setState</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+        <span class="token literal-property property">filmList</span><span class="token operator">:</span> res<span class="token punctuation">.</span>data<span class="token punctuation">.</span>data<span class="token punctuation">.</span>films
+      <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+  <span class="token punctuation">&#125;</span>
+  <span class="token function">render</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> <span class="token punctuation">(</span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">></span></span><span class="token plain-text">
+        </span><span class="token punctuation">&#123;</span><span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">.</span>filmList<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token parameter">item</span> <span class="token operator">=></span> <span class="token punctuation">(</span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">FilmItem</span></span> <span class="token attr-name">key</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">&#123;</span>item<span class="token punctuation">.</span>filmId<span class="token punctuation">&#125;</span></span> <span class="token spread"><span class="token punctuation">&#123;</span><span class="token operator">...</span>item<span class="token punctuation">&#125;</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">FilmItem</span></span><span class="token punctuation">></span></span>
+        <span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">&#125;</span><span class="token plain-text">
+        </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">FilmDetail</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">FilmDetail</span></span><span class="token punctuation">></span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+    <span class="token punctuation">)</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h4 id="context状态数传参"><a href="#context状态数传参" class="headerlink" title="context状态数传参"></a>context状态数传参</h4><pre class="line-numbers language-react" data-language="react"><code class="language-react">&#x2F;&#x2F; @ts-nocheck
-import React, &#123; Component &#125; from &#39;react&#39;
-import axios from &#39;axios&#39;
-import &#39;.&#x2F;style&#x2F;index.css&#39;
+<h4 id="context状态数传参"><a href="#context状态数传参" class="headerlink" title="context状态数传参"></a>context状态数传参</h4><pre class="line-numbers language-jsx" data-language="jsx"><code class="language-jsx"><span class="token comment">// @ts-nocheck</span>
+<span class="token keyword">import</span> React<span class="token punctuation">,</span> <span class="token punctuation">&#123;</span> Component <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'react'</span>
+<span class="token keyword">import</span> axios <span class="token keyword">from</span> <span class="token string">'axios'</span>
+<span class="token keyword">import</span> <span class="token string">'./style/index.css'</span>
 
-const GlobalCotext &#x3D; React.createContext()
-class FilmItem extends Component &#123;
-  render() &#123;
-    const &#123; name, poster, grade, synopsis &#125; &#x3D; this.props
-    return (
-      &lt;GlobalCotext.Consumer&gt;
-        &#123;value &#x3D;&gt; &#123;
-          return (
-            &lt;div
-              className&#x3D;&quot;filmitem&quot;
-              onClick&#x3D;&#123;() &#x3D;&gt; &#123;
-                value.changeInfo(synopsis)
-              &#125;&#125;
-            &gt;
-              &lt;img src&#x3D;&#123;poster&#125; alt&#x3D;&quot;poster&quot; &#x2F;&gt;
-              &lt;h4&gt;&#123;name&#125;&lt;&#x2F;h4&gt;
-              &lt;div&gt;观众评分：&#123;grade&#125;&lt;&#x2F;div&gt;
-            &lt;&#x2F;div&gt;
-          )
-        &#125;&#125;
-      &lt;&#x2F;GlobalCotext.Consumer&gt;
-    )
-  &#125;
-&#125;
+<span class="token keyword">const</span> GlobalCotext <span class="token operator">=</span> React<span class="token punctuation">.</span><span class="token function">createContext</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">class</span> <span class="token class-name">FilmItem</span> <span class="token keyword">extends</span> <span class="token class-name">Component</span> <span class="token punctuation">&#123;</span>
+  <span class="token function">render</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">const</span> <span class="token punctuation">&#123;</span> name<span class="token punctuation">,</span> poster<span class="token punctuation">,</span> grade<span class="token punctuation">,</span> synopsis <span class="token punctuation">&#125;</span> <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>props
+    <span class="token keyword">return</span> <span class="token punctuation">(</span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">GlobalCotext.Consumer</span></span><span class="token punctuation">></span></span><span class="token plain-text">
+        </span><span class="token punctuation">&#123;</span><span class="token parameter">value</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+          <span class="token keyword">return</span> <span class="token punctuation">(</span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span>
+              <span class="token attr-name">className</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>filmitem<span class="token punctuation">"</span></span>
+              <span class="token attr-name">onClick</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">&#123;</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+                value<span class="token punctuation">.</span><span class="token function">changeInfo</span><span class="token punctuation">(</span>synopsis<span class="token punctuation">)</span>
+              <span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span></span>
+            <span class="token punctuation">></span></span><span class="token plain-text">
+              </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">&#123;</span>poster<span class="token punctuation">&#125;</span></span> <span class="token attr-name">alt</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>poster<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span><span class="token plain-text">
+              </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h4</span><span class="token punctuation">></span></span><span class="token punctuation">&#123;</span>name<span class="token punctuation">&#125;</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h4</span><span class="token punctuation">></span></span><span class="token plain-text">
+              </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">></span></span><span class="token plain-text">观众评分：</span><span class="token punctuation">&#123;</span>grade<span class="token punctuation">&#125;</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span><span class="token plain-text">
+            </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+          <span class="token punctuation">)</span>
+        <span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">GlobalCotext.Consumer</span></span><span class="token punctuation">></span></span>
+    <span class="token punctuation">)</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
 
-class FilmDetail extends Component &#123;
-  render() &#123;
-    return (
-      &lt;GlobalCotext.Consumer&gt;
-        &#123;value &#x3D;&gt; &lt;div className&#x3D;&quot;filmdetail&quot;&gt;&#123;value.info&#125;&lt;&#x2F;div&gt;&#125;
-      &lt;&#x2F;GlobalCotext.Consumer&gt;
-    )
-  &#125;
-&#125;
+<span class="token keyword">class</span> <span class="token class-name">FilmDetail</span> <span class="token keyword">extends</span> <span class="token class-name">Component</span> <span class="token punctuation">&#123;</span>
+  <span class="token function">render</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> <span class="token punctuation">(</span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">GlobalCotext.Consumer</span></span><span class="token punctuation">></span></span><span class="token plain-text">
+        </span><span class="token punctuation">&#123;</span><span class="token parameter">value</span> <span class="token operator">=></span> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">className</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>filmdetail<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token punctuation">&#123;</span>value<span class="token punctuation">.</span>info<span class="token punctuation">&#125;</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span><span class="token punctuation">&#125;</span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">GlobalCotext.Consumer</span></span><span class="token punctuation">></span></span>
+    <span class="token punctuation">)</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
 
-export default class App extends Component &#123;
-  constructor() &#123;
-    super()
-    this.state &#x3D; &#123;
-      filmList: [],
-      info: &#39;&#39;
-    &#125;
-    axios.get(&#39;&#x2F;test.json&#39;).then(res &#x3D;&gt; &#123;
-      this.setState(&#123;
-        filmList: res.data.data.films
-      &#125;)
-    &#125;)
-  &#125;
-  render() &#123;
-    return (
-      &lt;GlobalCotext.Provider
-        value&#x3D;&#123;&#123;
-          info: this.state.info,
-          changeInfo: val &#x3D;&gt; &#123;
-            this.setState(&#123;
-              info: val
-            &#125;)
-          &#125;
-        &#125;&#125;
-      &gt;
-        &lt;div&gt;
-          &#123;this.state.filmList.map(item &#x3D;&gt; (
-            &lt;FilmItem key&#x3D;&#123;item.filmId&#125; &#123;...item&#125;&gt;&lt;&#x2F;FilmItem&gt;
-          ))&#125;
-          &lt;FilmDetail&gt;&lt;&#x2F;FilmDetail&gt;
-        &lt;&#x2F;div&gt;
-      &lt;&#x2F;GlobalCotext.Provider&gt;
-    )
-  &#125;
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">class</span> <span class="token class-name">App</span> <span class="token keyword">extends</span> <span class="token class-name">Component</span> <span class="token punctuation">&#123;</span>
+  <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">super</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>state <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+      <span class="token literal-property property">filmList</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">info</span><span class="token operator">:</span> <span class="token string">''</span>
+    <span class="token punctuation">&#125;</span>
+    axios<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">'/test.json'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token parameter">res</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">setState</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+        <span class="token literal-property property">filmList</span><span class="token operator">:</span> res<span class="token punctuation">.</span>data<span class="token punctuation">.</span>data<span class="token punctuation">.</span>films
+      <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+  <span class="token punctuation">&#125;</span>
+  <span class="token function">render</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> <span class="token punctuation">(</span>
+      <span class="token operator">&lt;</span>GlobalCotext<span class="token punctuation">.</span>Provider
+        value<span class="token operator">=</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#123;</span>
+          <span class="token literal-property property">info</span><span class="token operator">:</span> <span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">.</span>info<span class="token punctuation">,</span>
+          <span class="token function-variable function">changeInfo</span><span class="token operator">:</span> <span class="token parameter">val</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">setState</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+              <span class="token literal-property property">info</span><span class="token operator">:</span> val
+            <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+          <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span>
+      <span class="token operator">></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">></span></span><span class="token plain-text">
+          </span><span class="token punctuation">&#123;</span><span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">.</span>filmList<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token parameter">item</span> <span class="token operator">=></span> <span class="token punctuation">(</span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">FilmItem</span></span> <span class="token attr-name">key</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">&#123;</span>item<span class="token punctuation">.</span>filmId<span class="token punctuation">&#125;</span></span> <span class="token spread"><span class="token punctuation">&#123;</span><span class="token operator">...</span>item<span class="token punctuation">&#125;</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">FilmItem</span></span><span class="token punctuation">></span></span>
+          <span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">&#125;</span><span class="token plain-text">
+          </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">FilmDetail</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">FilmDetail</span></span><span class="token punctuation">></span></span><span class="token plain-text">
+        </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">GlobalCotext.Provider</span></span><span class="token punctuation">></span></span>
+    <span class="token punctuation">)</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h2 id="插槽"><a href="#插槽" class="headerlink" title="插槽"></a>插槽</h2><p>通过<code>this.props.children</code>访问插槽内容</p>
 <p><code>this.props.children</code>是一个数组，可以利用下标将内容分别插入组件的不同部分</p>
-<pre class="line-numbers language-react" data-language="react"><code class="language-react">import React, &#123; Component &#125; from &#39;react&#39;
+<pre class="line-numbers language-jsx" data-language="jsx"><code class="language-jsx"><span class="token keyword">import</span> React<span class="token punctuation">,</span> <span class="token punctuation">&#123;</span> Component <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'react'</span>
 
-class Child extends Component &#123;
-  render() &#123;
-    return (
-      &lt;div&gt;
-        &lt;div&gt;child&lt;&#x2F;div&gt;
-        &#123;this.props.children[0]&#125;  &#123;&#x2F;* &lt;div&gt;1111111111&lt;&#x2F;div&gt; *&#x2F;&#125;
-        &#123;this.props.children[1]&#125;  &#123;&#x2F;* &lt;div&gt;2222222222&lt;&#x2F;div&gt; *&#x2F;&#125;
-        &#123;this.props.children[2]&#125;  &#123;&#x2F;* &lt;div&gt;3333333333&lt;&#x2F;div&gt; *&#x2F;&#125;
-      &lt;&#x2F;div&gt;
-    )
-  &#125;
-&#125;
+<span class="token keyword">class</span> <span class="token class-name">Child</span> <span class="token keyword">extends</span> <span class="token class-name">Component</span> <span class="token punctuation">&#123;</span>
+  <span class="token function">render</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> <span class="token punctuation">(</span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">></span></span><span class="token plain-text">
+        </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">></span></span><span class="token plain-text">child</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span><span class="token plain-text">
+        </span><span class="token punctuation">&#123;</span><span class="token keyword">this</span><span class="token punctuation">.</span>props<span class="token punctuation">.</span>children<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">&#125;</span><span class="token plain-text">  </span><span class="token punctuation">&#123;</span><span class="token comment">/* &lt;div>1111111111&lt;/div> */</span><span class="token punctuation">&#125;</span><span class="token plain-text">
+        </span><span class="token punctuation">&#123;</span><span class="token keyword">this</span><span class="token punctuation">.</span>props<span class="token punctuation">.</span>children<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">&#125;</span><span class="token plain-text">  </span><span class="token punctuation">&#123;</span><span class="token comment">/* &lt;div>2222222222&lt;/div> */</span><span class="token punctuation">&#125;</span><span class="token plain-text">
+        </span><span class="token punctuation">&#123;</span><span class="token keyword">this</span><span class="token punctuation">.</span>props<span class="token punctuation">.</span>children<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">&#125;</span><span class="token plain-text">  </span><span class="token punctuation">&#123;</span><span class="token comment">/* &lt;div>3333333333&lt;/div> */</span><span class="token punctuation">&#125;</span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+    <span class="token punctuation">)</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
 
-export default class App extends Component &#123;
-  render() &#123;
-    return (
-      &lt;div&gt;
-        &lt;Child&gt;
-          &lt;div&gt;1111111111&lt;&#x2F;div&gt;
-          &lt;div&gt;2222222222&lt;&#x2F;div&gt;
-          &lt;div&gt;3333333333&lt;&#x2F;div&gt;
-        &lt;&#x2F;Child&gt;
-      &lt;&#x2F;div&gt;
-    )
-  &#125;
-&#125;
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">class</span> <span class="token class-name">App</span> <span class="token keyword">extends</span> <span class="token class-name">Component</span> <span class="token punctuation">&#123;</span>
+  <span class="token function">render</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> <span class="token punctuation">(</span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">></span></span><span class="token plain-text">
+        </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">Child</span></span><span class="token punctuation">></span></span><span class="token plain-text">
+          </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">></span></span><span class="token plain-text">1111111111</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span><span class="token plain-text">
+          </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">></span></span><span class="token plain-text">2222222222</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span><span class="token plain-text">
+          </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">></span></span><span class="token plain-text">3333333333</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span><span class="token plain-text">
+        </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token class-name">Child</span></span><span class="token punctuation">></span></span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+    <span class="token punctuation">)</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 
