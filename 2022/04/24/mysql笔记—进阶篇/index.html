@@ -165,17 +165,17 @@
   
   </header>
   <div id="section" class="post-content">
-    <h2 id="存储引擎"><a href="#存储引擎" class="headerlink" title="存储引擎"></a>存储引擎</h2><h3 id="MySQL体系结构"><a href="#MySQL体系结构" class="headerlink" title="MySQL体系结构"></a>MySQL体系结构</h3><p><img src="https://dhc.pythonanywhere.com/media/editor/MySQL%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84_20220315034329549927.png" alt="结构图" title="结构图" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://dhc.pythonanywhere.com/media/editor/MySQL%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84_20220315034329549927.png" class="lozad post-image"></p>
+    <h2 id="存储引擎"><a href="#存储引擎" class="headerlink" title="存储引擎"></a>存储引擎</h2><h3 id="MySQL-体系结构"><a href="#MySQL-体系结构" class="headerlink" title="MySQL 体系结构"></a>MySQL 体系结构</h3><p><img src="/img/MySQL.png" alt="MySQL体系结构" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="/img/MySQL.png" class="lozad post-image"></p>
 <p><strong>连接层</strong></p>
 <p>最上层是一些客户端和链接服务，主要完成一些类似于连接处理、授权认证、及相关的安全方案。服务器也会为安全接入的每个客户端验证它所具有的操作权限。</p>
 <p><strong>服务层</strong></p>
-<p>第二层架构主要完成大多数的核心服务功能，如SQL接口，并完成缓存的查询，SQL的分析和优化，部分内置函数的执行。所有跨存储引擎的功能也在这一层实现，如过程、函数等。</p>
+<p>第二层架构主要完成大多数的核心服务功能，如 SQL 接口，并完成缓存的查询，SQL 的分析和优化，部分内置函数的执行。所有跨存储引擎的功能也在这一层实现，如过程、函数等。</p>
 <p><strong>引擎层</strong></p>
-<p>存储引擎真正的负责了MySQL中数据的存储和提取，服务器通过API和存储引擎进行通信。不同的存储引擎具有不同的功能，这样我们可以根据自己的需要，来选取合适的存储引擎。</p>
+<p>存储引擎真正的负责了 MySQL 中数据的存储和提取，服务器通过 API 和存储引擎进行通信。不同的存储引擎具有不同的功能，这样我们可以根据自己的需要，来选取合适的存储引擎。</p>
 <p><strong>存储层</strong></p>
 <p>主要是将数据存储在文件系统之上，并完成与存储引擎的交互。</p>
 <h3 id="存储引擎简介"><a href="#存储引擎简介" class="headerlink" title="存储引擎简介"></a>存储引擎简介</h3><p>存储引擎就是存储数据、建立索引、更新&#x2F;查询数据等技术的实现方式。存储引擎是基于表而不是基于库的，所以存储引擎也可以被称为表引擎。</p>
-<div class="post-note note-success"><p>MySQL默认存储引擎是InnoDB</p></div>
+<div class="post-note note-success"><p>MySQL 默认存储引擎是 InnoDB</p></div>
 
 <h4 id="相关操作"><a href="#相关操作" class="headerlink" title="相关操作"></a>相关操作</h4><p><strong>查询建表语句（可以查看表的存储引擎）</strong></p>
 <pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">show</span> <span class="token keyword">create</span> <span class="token keyword">table</span> 表名<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
@@ -197,12 +197,12 @@
 </ul>
 <p><strong>涉及的磁盘文件</strong></p>
 <ul>
-<li><code>xxx.ibd</code>： xxx代表表名，InnoDB 引擎的每张表都会对应这样一个表空间文件，存储该表的表结构（frm、sdi）、数据和索引。</li>
+<li><code>xxx.ibd</code>： xxx 代表表名，InnoDB 引擎的每张表都会对应这样一个表空间文件，存储该表的表结构（frm、sdi）、数据和索引。</li>
 <li>参数：innodb_file_per_table，决定多张表共享一个表空间文件还是每张表对应一个表空间文件。默认为打开状态，代表每一张表都对应一个表空间文件。</li>
 </ul>
-<h5 id="查看MySQL变量"><a href="#查看MySQL变量" class="headerlink" title="*查看MySQL变量"></a>*查看MySQL变量</h5><pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SHOW</span> VARIABLES <span class="token operator">LIKE</span> <span class="token string">'innodb_file_per_table'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h5 id="查看-MySQL-变量"><a href="#查看-MySQL-变量" class="headerlink" title="*查看 MySQL 变量"></a>*查看 MySQL 变量</h5><pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SHOW</span> VARIABLES <span class="token operator">LIKE</span> <span class="token string">'innodb_file_per_table'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<h5 id="从idb文件提取表结构"><a href="#从idb文件提取表结构" class="headerlink" title="*从idb文件提取表结构"></a>*从idb文件提取表结构</h5><p>在对应目录下打开命令行工具</p>
+<h5 id="从-idb-文件提取表结构"><a href="#从-idb-文件提取表结构" class="headerlink" title="*从 idb 文件提取表结构"></a>*从 idb 文件提取表结构</h5><p>在对应目录下打开命令行工具</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">ibd2sdi xxx.ibd<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>查询结果</p>
@@ -237,7 +237,7 @@
 <p><strong>特点</strong></p>
 <ul>
 <li>存放在内存中，速度快</li>
-<li>hash索引（默认）</li>
+<li>hash 索引（默认）</li>
 </ul>
 <p><strong>涉及的磁盘文件</strong></p>
 <ul>
@@ -271,20 +271,20 @@
 <td>表锁</td>
 </tr>
 <tr>
-<td>B+tree索引</td>
+<td>B+tree 索引</td>
 <td>支持</td>
 <td>支持</td>
 <td>支持</td>
 </tr>
 <tr>
-<td>Hash索引</td>
+<td>Hash 索引</td>
 <td>-</td>
 <td>-</td>
 <td>支持</td>
 </tr>
 <tr>
 <td>全文索引</td>
-<td>支持（5.6版本之后）</td>
+<td>支持（5.6 版本之后）</td>
 <td>支持</td>
 <td>-</td>
 </tr>
@@ -323,14 +323,14 @@
 <p>电商中的足迹和评论适合使用 MyISAM 引擎，缓存适合使用 Memory 引擎</p>
 <h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><h3 id="索引概述"><a href="#索引概述" class="headerlink" title="索引概述"></a>索引概述</h3><p>索引是帮助 MySQL<strong style="color:#ff7500">高效获取数据</strong> 的<strong style="color:#ff7500">数据结构（有序）</strong>。在数据之外，数据库系统还维护着满足特定查找算法的数据结构，这些数据结构以某种方式引用（指向）数据，这样就可以在这些数据结构上实现高级查询算法，这种数据结构就是索引</p>
 <h4 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h4><ul>
-<li>提高数据检索效率，降低数据库的IO成本</li>
-<li>通过索引列对数据进行排序，降低数据排序的成本，降低CPU的消耗</li>
+<li>提高数据检索效率，降低数据库的 IO 成本</li>
+<li>通过索引列对数据进行排序，降低数据排序的成本，降低 CPU 的消耗</li>
 </ul>
 <h4 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h4><ul>
 <li>索引列也是要占用空间的</li>
 <li>索引大大提高了查询效率，但降低了更新的速度，比如 INSERT、UPDATE、DELETE</li>
 </ul>
-<h3 id="索引结构"><a href="#索引结构" class="headerlink" title="索引结构"></a>索引结构</h3><p>MySQL的索引是在存储引擎层实现的，不同的存储引擎有不同的结构</p>
+<h3 id="索引结构"><a href="#索引结构" class="headerlink" title="索引结构"></a>索引结构</h3><p>MySQL 的索引是在存储引擎层实现的，不同的存储引擎有不同的结构</p>
 <h4 id="主要索引结构"><a href="#主要索引结构" class="headerlink" title="主要索引结构"></a>主要索引结构</h4><table>
 <thead>
 <tr>
@@ -340,7 +340,7 @@
 </thead>
 <tbody><tr>
 <td>B+Tree</td>
-<td>最常见的索引类型，大部分引擎都支持B+树索引</td>
+<td>最常见的索引类型，大部分引擎都支持 B+树索引</td>
 </tr>
 <tr>
 <td>Hash</td>
@@ -366,72 +366,72 @@
 </tr>
 </thead>
 <tbody><tr>
-<td>B+Tree索引</td>
+<td>B+Tree 索引</td>
 <td>支持</td>
 <td>支持</td>
 <td>支持</td>
 </tr>
 <tr>
-<td>Hash索引</td>
+<td>Hash 索引</td>
 <td>不支持</td>
 <td>不支持</td>
 <td>支持</td>
 </tr>
 <tr>
-<td>R-Tree索引</td>
+<td>R-Tree 索引</td>
 <td>不支持</td>
 <td>支持</td>
 <td>不支持</td>
 </tr>
 <tr>
 <td>Full-text</td>
-<td>5.6版本后支持</td>
+<td>5.6 版本后支持</td>
 <td>支持</td>
 <td>不支持</td>
 </tr>
 </tbody></table>
-<div class="post-note note-success"><p>平常所说的索引，如果没有特别指明，都是指B+树结构的索引</p></div>
+<div class="post-note note-success"><p>平常所说的索引，如果没有特别指明，都是指 B+树结构的索引</p></div>
 
-<h4 id="B-Tree（多路平衡查找树）"><a href="#B-Tree（多路平衡查找树）" class="headerlink" title="B-Tree（多路平衡查找树）"></a>B-Tree（多路平衡查找树）</h4><p>以一颗最大度数（max-degree）为5（5阶）的b-tree为例（每个节点最多存储4个key，5个指针）</p>
+<h4 id="B-Tree（多路平衡查找树）"><a href="#B-Tree（多路平衡查找树）" class="headerlink" title="B-Tree（多路平衡查找树）"></a>B-Tree（多路平衡查找树）</h4><p>以一颗最大度数（max-degree）为 5（5 阶）的 b-tree 为例（每个节点最多存储 4 个 key，5 个指针）</p>
 <p><img src="https://dhc.pythonanywhere.com/media/editor/B-Tree%E7%BB%93%E6%9E%84_20220316163813441163.png" alt="B-Tree结构" title="B-Tree结构" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://dhc.pythonanywhere.com/media/editor/B-Tree%E7%BB%93%E6%9E%84_20220316163813441163.png" class="lozad post-image"></p>
 <blockquote>
 <p>演示地址：<a target="_blank" rel="noopener" href="https://www.cs.usfca.edu/~galles/visualization/BTree.html">https://www.cs.usfca.edu/~galles/visualization/BTree.html</a></p>
 </blockquote>
-<h4 id="B-Tree"><a href="#B-Tree" class="headerlink" title="B+Tree"></a>B+Tree</h4><p><strong>特点</strong>（与B-Tree的区别）</p>
+<h4 id="B-Tree"><a href="#B-Tree" class="headerlink" title="B+Tree"></a>B+Tree</h4><p><strong>特点</strong>（与 B-Tree 的区别）</p>
 <ul>
 <li>所有数据都会出现在叶子节点，非叶子节点主要起到索引作用</li>
 <li>叶子节点形成一个单向链表</li>
 </ul>
 <p><strong>结构</strong></p>
-<p>以一颗最大度数（ max-degree）为4（4阶）的b+tree为例</p>
+<p>以一颗最大度数（ max-degree）为 4（4 阶）的 b+tree 为例</p>
 <p><img src="https://dhc.pythonanywhere.com/media/editor/B+Tree%E7%BB%93%E6%9E%84%E5%9B%BE_20220316170700591277.png" alt="B+Tree结构图" title="B+Tree结构图" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://dhc.pythonanywhere.com/media/editor/B+Tree%E7%BB%93%E6%9E%84%E5%9B%BE_20220316170700591277.png" class="lozad post-image"></p>
 <blockquote>
 <p>演示地址：<a target="_blank" rel="noopener" href="https://www.cs.usfca.edu/~galles/visualization/BPlusTree.html">https://www.cs.usfca.edu/~galles/visualization/BPlusTree.html</a></p>
 </blockquote>
-<p><strong>MySQL B+Tree索引结构</strong></p>
+<p><strong>MySQL B+Tree 索引结构</strong></p>
 <p>MySQL 索引数据结构对经典的 B+Tree 进行了优化，在原 B+Tree 的基础上，增加一个指向相邻叶子节点的链表指针，就形成了带有顺序指针的 B+Tree，提高区间访问的性能</p>
 <p><img src="https://dhc.pythonanywhere.com/media/editor/%E7%BB%93%E6%9E%84%E5%9B%BE_20220316171730865611.png" alt="MySQL B+Tree 结构图" title="MySQL B+Tree 结构图" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://dhc.pythonanywhere.com/media/editor/%E7%BB%93%E6%9E%84%E5%9B%BE_20220316171730865611.png" class="lozad post-image"></p>
-<h4 id="Hash"><a href="#Hash" class="headerlink" title="Hash"></a>Hash</h4><p>哈希索引就是采用一定的hash算法，将键值换算成新的hash值，映射到对应的槽位上，然后存储在hash表中</p>
-<p>如果两个（或多个）键值，映射到一个相同的槽位上，他们就产生了hash冲突（也称为hash碰撞），可以通过链表来解决</p>
+<h4 id="Hash"><a href="#Hash" class="headerlink" title="Hash"></a>Hash</h4><p>哈希索引就是采用一定的 hash 算法，将键值换算成新的 hash 值，映射到对应的槽位上，然后存储在 hash 表中</p>
+<p>如果两个（或多个）键值，映射到一个相同的槽位上，他们就产生了 hash 冲突（也称为 hash 碰撞），可以通过链表来解决</p>
 <p><img src="https://dhc.pythonanywhere.com/media/editor/Hash%E7%B4%A2%E5%BC%95%E5%8E%9F%E7%90%86%E5%9B%BE_20220317143226150679.png" alt="Hash索引原理图" title="Hash索引原理图" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://dhc.pythonanywhere.com/media/editor/Hash%E7%B4%A2%E5%BC%95%E5%8E%9F%E7%90%86%E5%9B%BE_20220317143226150679.png" class="lozad post-image"></p>
 <p><strong>特点</strong></p>
 <ul>
-<li>Hash索引只能用于对等比较（&#x3D;、in），不支持范围查询（betwwn、&gt;、&lt;、…）</li>
+<li>Hash 索引只能用于对等比较（&#x3D;、in），不支持范围查询（betwwn、&gt;、&lt;、…）</li>
 <li>无法利用索引完成排序操作</li>
 <li>查询效率高，通常只需要一次检索就可以了，效率通常要高于 B+Tree 索引</li>
 </ul>
 <p><strong>存储引擎支持</strong></p>
 <ul>
-<li>只有Memory支持</li>
-<li>但是InnoDB具有自适应hash功能，hash索引是存储引擎根据 B+Tree 索引在指定条件下自动构建的</li>
+<li>只有 Memory 支持</li>
+<li>但是 InnoDB 具有自适应 hash 功能，hash 索引是存储引擎根据 B+Tree 索引在指定条件下自动构建的</li>
 </ul>
 <h4 id="为什么-InnoDB-存储引擎选择使用-B-Tree-索引结构"><a href="#为什么-InnoDB-存储引擎选择使用-B-Tree-索引结构" class="headerlink" title="为什么 InnoDB 存储引擎选择使用 B+Tree 索引结构"></a>为什么 InnoDB 存储引擎选择使用 B+Tree 索引结构</h4><ul>
 <li>相对于二叉树，层级更少，搜索效率高</li>
 <li>对于 B-Tree，无论是叶子节点还是非叶子节点，都会保存数据，这样导致一页中存储的键值减少，指针也跟着减少，要同样保存大量数据，只能增加树的高度，导致性能降低</li>
-<li>B+Tree中叶子节点间形成双向链表，便于范围搜索和排序</li>
+<li>B+Tree 中叶子节点间形成双向链表，便于范围搜索和排序</li>
 <li>相对于 Hash 索引，B+Tree 支持范围匹配及排序操作</li>
 </ul>
-<h3 id="索引分类"><a href="#索引分类" class="headerlink" title="索引分类"></a>索引分类</h3><h3 id="索引语法"><a href="#索引语法" class="headerlink" title="索引语法"></a>索引语法</h3><h3 id="SQL性能分析"><a href="#SQL性能分析" class="headerlink" title="SQL性能分析"></a>SQL性能分析</h3><h3 id="索引使用"><a href="#索引使用" class="headerlink" title="索引使用"></a>索引使用</h3><h3 id="索引设计原则"><a href="#索引设计原则" class="headerlink" title="索引设计原则"></a>索引设计原则</h3><div class="post-note note-success"></div>
+<h3 id="索引分类"><a href="#索引分类" class="headerlink" title="索引分类"></a>索引分类</h3><h3 id="索引语法"><a href="#索引语法" class="headerlink" title="索引语法"></a>索引语法</h3><h3 id="SQL-性能分析"><a href="#SQL-性能分析" class="headerlink" title="SQL 性能分析"></a>SQL 性能分析</h3><h3 id="索引使用"><a href="#索引使用" class="headerlink" title="索引使用"></a>索引使用</h3><h3 id="索引设计原则"><a href="#索引设计原则" class="headerlink" title="索引设计原则"></a>索引设计原则</h3><div class="post-note note-success"></div>
 
 <p><strong style="color:#ff7500"></strong></p>
 
@@ -471,7 +471,7 @@
 
 <div class="card card-content toc-card" id="mobiletoc">
   <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>TOC</div>
-<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E"><span class="toc-text">存储引擎</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#MySQL%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84"><span class="toc-text">MySQL体系结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E%E7%AE%80%E4%BB%8B"><span class="toc-text">存储引擎简介</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C"><span class="toc-text">相关操作</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E%E7%89%B9%E7%82%B9"><span class="toc-text">存储引擎特点</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#InnoDB"><span class="toc-text">InnoDB</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8BMySQL%E5%8F%98%E9%87%8F"><span class="toc-text">*查看MySQL变量</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BB%8Eidb%E6%96%87%E4%BB%B6%E6%8F%90%E5%8F%96%E8%A1%A8%E7%BB%93%E6%9E%84"><span class="toc-text">*从idb文件提取表结构</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#MyISAM"><span class="toc-text">MyISAM</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Memory"><span class="toc-text">Memory</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E%E7%89%B9%E7%82%B9-1"><span class="toc-text">存储引擎特点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E%E9%80%89%E6%8B%A9"><span class="toc-text">存储引擎选择</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95"><span class="toc-text">索引</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95%E6%A6%82%E8%BF%B0"><span class="toc-text">索引概述</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%98%E7%82%B9"><span class="toc-text">优点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BC%BA%E7%82%B9"><span class="toc-text">缺点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95%E7%BB%93%E6%9E%84"><span class="toc-text">索引结构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BB%E8%A6%81%E7%B4%A2%E5%BC%95%E7%BB%93%E6%9E%84"><span class="toc-text">主要索引结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#B-Tree%EF%BC%88%E5%A4%9A%E8%B7%AF%E5%B9%B3%E8%A1%A1%E6%9F%A5%E6%89%BE%E6%A0%91%EF%BC%89"><span class="toc-text">B-Tree（多路平衡查找树）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#B-Tree"><span class="toc-text">B+Tree</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Hash"><span class="toc-text">Hash</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88-InnoDB-%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E%E9%80%89%E6%8B%A9%E4%BD%BF%E7%94%A8-B-Tree-%E7%B4%A2%E5%BC%95%E7%BB%93%E6%9E%84"><span class="toc-text">为什么 InnoDB 存储引擎选择使用 B+Tree 索引结构</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95%E5%88%86%E7%B1%BB"><span class="toc-text">索引分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95%E8%AF%AD%E6%B3%95"><span class="toc-text">索引语法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SQL%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90"><span class="toc-text">SQL性能分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95%E4%BD%BF%E7%94%A8"><span class="toc-text">索引使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99"><span class="toc-text">索引设计原则</span></a></li></ol></li></ol>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E"><span class="toc-text">存储引擎</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#MySQL-%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84"><span class="toc-text">MySQL 体系结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E%E7%AE%80%E4%BB%8B"><span class="toc-text">存储引擎简介</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C"><span class="toc-text">相关操作</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E%E7%89%B9%E7%82%B9"><span class="toc-text">存储引擎特点</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#InnoDB"><span class="toc-text">InnoDB</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B-MySQL-%E5%8F%98%E9%87%8F"><span class="toc-text">*查看 MySQL 变量</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BB%8E-idb-%E6%96%87%E4%BB%B6%E6%8F%90%E5%8F%96%E8%A1%A8%E7%BB%93%E6%9E%84"><span class="toc-text">*从 idb 文件提取表结构</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#MyISAM"><span class="toc-text">MyISAM</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Memory"><span class="toc-text">Memory</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E%E7%89%B9%E7%82%B9-1"><span class="toc-text">存储引擎特点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E%E9%80%89%E6%8B%A9"><span class="toc-text">存储引擎选择</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95"><span class="toc-text">索引</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95%E6%A6%82%E8%BF%B0"><span class="toc-text">索引概述</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%98%E7%82%B9"><span class="toc-text">优点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BC%BA%E7%82%B9"><span class="toc-text">缺点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95%E7%BB%93%E6%9E%84"><span class="toc-text">索引结构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BB%E8%A6%81%E7%B4%A2%E5%BC%95%E7%BB%93%E6%9E%84"><span class="toc-text">主要索引结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#B-Tree%EF%BC%88%E5%A4%9A%E8%B7%AF%E5%B9%B3%E8%A1%A1%E6%9F%A5%E6%89%BE%E6%A0%91%EF%BC%89"><span class="toc-text">B-Tree（多路平衡查找树）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#B-Tree"><span class="toc-text">B+Tree</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Hash"><span class="toc-text">Hash</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88-InnoDB-%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E%E9%80%89%E6%8B%A9%E4%BD%BF%E7%94%A8-B-Tree-%E7%B4%A2%E5%BC%95%E7%BB%93%E6%9E%84"><span class="toc-text">为什么 InnoDB 存储引擎选择使用 B+Tree 索引结构</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95%E5%88%86%E7%B1%BB"><span class="toc-text">索引分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95%E8%AF%AD%E6%B3%95"><span class="toc-text">索引语法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SQL-%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90"><span class="toc-text">SQL 性能分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95%E4%BD%BF%E7%94%A8"><span class="toc-text">索引使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99"><span class="toc-text">索引设计原则</span></a></li></ol></li></ol>
 </div></main>
           <aside class="left-column">
             
@@ -504,7 +504,7 @@
   <article class="display-when-two-columns spacer">
     <div class="card card-content toc-card">
       <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>TOC</div>
-<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E"><span class="toc-text">存储引擎</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#MySQL%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84"><span class="toc-text">MySQL体系结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E%E7%AE%80%E4%BB%8B"><span class="toc-text">存储引擎简介</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C"><span class="toc-text">相关操作</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E%E7%89%B9%E7%82%B9"><span class="toc-text">存储引擎特点</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#InnoDB"><span class="toc-text">InnoDB</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8BMySQL%E5%8F%98%E9%87%8F"><span class="toc-text">*查看MySQL变量</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BB%8Eidb%E6%96%87%E4%BB%B6%E6%8F%90%E5%8F%96%E8%A1%A8%E7%BB%93%E6%9E%84"><span class="toc-text">*从idb文件提取表结构</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#MyISAM"><span class="toc-text">MyISAM</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Memory"><span class="toc-text">Memory</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E%E7%89%B9%E7%82%B9-1"><span class="toc-text">存储引擎特点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E%E9%80%89%E6%8B%A9"><span class="toc-text">存储引擎选择</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95"><span class="toc-text">索引</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95%E6%A6%82%E8%BF%B0"><span class="toc-text">索引概述</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%98%E7%82%B9"><span class="toc-text">优点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BC%BA%E7%82%B9"><span class="toc-text">缺点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95%E7%BB%93%E6%9E%84"><span class="toc-text">索引结构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BB%E8%A6%81%E7%B4%A2%E5%BC%95%E7%BB%93%E6%9E%84"><span class="toc-text">主要索引结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#B-Tree%EF%BC%88%E5%A4%9A%E8%B7%AF%E5%B9%B3%E8%A1%A1%E6%9F%A5%E6%89%BE%E6%A0%91%EF%BC%89"><span class="toc-text">B-Tree（多路平衡查找树）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#B-Tree"><span class="toc-text">B+Tree</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Hash"><span class="toc-text">Hash</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88-InnoDB-%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E%E9%80%89%E6%8B%A9%E4%BD%BF%E7%94%A8-B-Tree-%E7%B4%A2%E5%BC%95%E7%BB%93%E6%9E%84"><span class="toc-text">为什么 InnoDB 存储引擎选择使用 B+Tree 索引结构</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95%E5%88%86%E7%B1%BB"><span class="toc-text">索引分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95%E8%AF%AD%E6%B3%95"><span class="toc-text">索引语法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SQL%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90"><span class="toc-text">SQL性能分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95%E4%BD%BF%E7%94%A8"><span class="toc-text">索引使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99"><span class="toc-text">索引设计原则</span></a></li></ol></li></ol>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E"><span class="toc-text">存储引擎</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#MySQL-%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84"><span class="toc-text">MySQL 体系结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E%E7%AE%80%E4%BB%8B"><span class="toc-text">存储引擎简介</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C"><span class="toc-text">相关操作</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E%E7%89%B9%E7%82%B9"><span class="toc-text">存储引擎特点</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#InnoDB"><span class="toc-text">InnoDB</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B-MySQL-%E5%8F%98%E9%87%8F"><span class="toc-text">*查看 MySQL 变量</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BB%8E-idb-%E6%96%87%E4%BB%B6%E6%8F%90%E5%8F%96%E8%A1%A8%E7%BB%93%E6%9E%84"><span class="toc-text">*从 idb 文件提取表结构</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#MyISAM"><span class="toc-text">MyISAM</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Memory"><span class="toc-text">Memory</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E%E7%89%B9%E7%82%B9-1"><span class="toc-text">存储引擎特点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E%E9%80%89%E6%8B%A9"><span class="toc-text">存储引擎选择</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95"><span class="toc-text">索引</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95%E6%A6%82%E8%BF%B0"><span class="toc-text">索引概述</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%98%E7%82%B9"><span class="toc-text">优点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BC%BA%E7%82%B9"><span class="toc-text">缺点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95%E7%BB%93%E6%9E%84"><span class="toc-text">索引结构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BB%E8%A6%81%E7%B4%A2%E5%BC%95%E7%BB%93%E6%9E%84"><span class="toc-text">主要索引结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#B-Tree%EF%BC%88%E5%A4%9A%E8%B7%AF%E5%B9%B3%E8%A1%A1%E6%9F%A5%E6%89%BE%E6%A0%91%EF%BC%89"><span class="toc-text">B-Tree（多路平衡查找树）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#B-Tree"><span class="toc-text">B+Tree</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Hash"><span class="toc-text">Hash</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88-InnoDB-%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E%E9%80%89%E6%8B%A9%E4%BD%BF%E7%94%A8-B-Tree-%E7%B4%A2%E5%BC%95%E7%BB%93%E6%9E%84"><span class="toc-text">为什么 InnoDB 存储引擎选择使用 B+Tree 索引结构</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95%E5%88%86%E7%B1%BB"><span class="toc-text">索引分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95%E8%AF%AD%E6%B3%95"><span class="toc-text">索引语法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SQL-%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90"><span class="toc-text">SQL 性能分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95%E4%BD%BF%E7%94%A8"><span class="toc-text">索引使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99"><span class="toc-text">索引设计原则</span></a></li></ol></li></ol>
     </div>
   </article>
   
@@ -621,7 +621,7 @@
   
   <article class="card card-content toc-card">
     <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>TOC</div>
-<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E"><span class="toc-text">存储引擎</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#MySQL%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84"><span class="toc-text">MySQL体系结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E%E7%AE%80%E4%BB%8B"><span class="toc-text">存储引擎简介</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C"><span class="toc-text">相关操作</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E%E7%89%B9%E7%82%B9"><span class="toc-text">存储引擎特点</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#InnoDB"><span class="toc-text">InnoDB</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8BMySQL%E5%8F%98%E9%87%8F"><span class="toc-text">*查看MySQL变量</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BB%8Eidb%E6%96%87%E4%BB%B6%E6%8F%90%E5%8F%96%E8%A1%A8%E7%BB%93%E6%9E%84"><span class="toc-text">*从idb文件提取表结构</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#MyISAM"><span class="toc-text">MyISAM</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Memory"><span class="toc-text">Memory</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E%E7%89%B9%E7%82%B9-1"><span class="toc-text">存储引擎特点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E%E9%80%89%E6%8B%A9"><span class="toc-text">存储引擎选择</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95"><span class="toc-text">索引</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95%E6%A6%82%E8%BF%B0"><span class="toc-text">索引概述</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%98%E7%82%B9"><span class="toc-text">优点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BC%BA%E7%82%B9"><span class="toc-text">缺点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95%E7%BB%93%E6%9E%84"><span class="toc-text">索引结构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BB%E8%A6%81%E7%B4%A2%E5%BC%95%E7%BB%93%E6%9E%84"><span class="toc-text">主要索引结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#B-Tree%EF%BC%88%E5%A4%9A%E8%B7%AF%E5%B9%B3%E8%A1%A1%E6%9F%A5%E6%89%BE%E6%A0%91%EF%BC%89"><span class="toc-text">B-Tree（多路平衡查找树）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#B-Tree"><span class="toc-text">B+Tree</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Hash"><span class="toc-text">Hash</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88-InnoDB-%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E%E9%80%89%E6%8B%A9%E4%BD%BF%E7%94%A8-B-Tree-%E7%B4%A2%E5%BC%95%E7%BB%93%E6%9E%84"><span class="toc-text">为什么 InnoDB 存储引擎选择使用 B+Tree 索引结构</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95%E5%88%86%E7%B1%BB"><span class="toc-text">索引分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95%E8%AF%AD%E6%B3%95"><span class="toc-text">索引语法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SQL%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90"><span class="toc-text">SQL性能分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95%E4%BD%BF%E7%94%A8"><span class="toc-text">索引使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99"><span class="toc-text">索引设计原则</span></a></li></ol></li></ol>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E"><span class="toc-text">存储引擎</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#MySQL-%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84"><span class="toc-text">MySQL 体系结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E%E7%AE%80%E4%BB%8B"><span class="toc-text">存储引擎简介</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C"><span class="toc-text">相关操作</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E%E7%89%B9%E7%82%B9"><span class="toc-text">存储引擎特点</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#InnoDB"><span class="toc-text">InnoDB</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B-MySQL-%E5%8F%98%E9%87%8F"><span class="toc-text">*查看 MySQL 变量</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BB%8E-idb-%E6%96%87%E4%BB%B6%E6%8F%90%E5%8F%96%E8%A1%A8%E7%BB%93%E6%9E%84"><span class="toc-text">*从 idb 文件提取表结构</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#MyISAM"><span class="toc-text">MyISAM</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Memory"><span class="toc-text">Memory</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E%E7%89%B9%E7%82%B9-1"><span class="toc-text">存储引擎特点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E%E9%80%89%E6%8B%A9"><span class="toc-text">存储引擎选择</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95"><span class="toc-text">索引</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95%E6%A6%82%E8%BF%B0"><span class="toc-text">索引概述</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%98%E7%82%B9"><span class="toc-text">优点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BC%BA%E7%82%B9"><span class="toc-text">缺点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95%E7%BB%93%E6%9E%84"><span class="toc-text">索引结构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BB%E8%A6%81%E7%B4%A2%E5%BC%95%E7%BB%93%E6%9E%84"><span class="toc-text">主要索引结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#B-Tree%EF%BC%88%E5%A4%9A%E8%B7%AF%E5%B9%B3%E8%A1%A1%E6%9F%A5%E6%89%BE%E6%A0%91%EF%BC%89"><span class="toc-text">B-Tree（多路平衡查找树）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#B-Tree"><span class="toc-text">B+Tree</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Hash"><span class="toc-text">Hash</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88-InnoDB-%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E%E9%80%89%E6%8B%A9%E4%BD%BF%E7%94%A8-B-Tree-%E7%B4%A2%E5%BC%95%E7%BB%93%E6%9E%84"><span class="toc-text">为什么 InnoDB 存储引擎选择使用 B+Tree 索引结构</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95%E5%88%86%E7%B1%BB"><span class="toc-text">索引分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95%E8%AF%AD%E6%B3%95"><span class="toc-text">索引语法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SQL-%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90"><span class="toc-text">SQL 性能分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95%E4%BD%BF%E7%94%A8"><span class="toc-text">索引使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99"><span class="toc-text">索引设计原则</span></a></li></ol></li></ol>
   </article>
   
   
