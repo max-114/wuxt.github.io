@@ -165,7 +165,7 @@
   
   </header>
   <div id="section" class="post-content">
-    <h2 id="存储引擎"><a href="#存储引擎" class="headerlink" title="存储引擎"></a>存储引擎</h2><h3 id="MySQL-体系结构"><a href="#MySQL-体系结构" class="headerlink" title="MySQL 体系结构"></a>MySQL 体系结构</h3><p><img src="/img/MySQL.png" alt="MySQL体系结构" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="/img/MySQL.png" class="lozad post-image"></p>
+    <h2 id="存储引擎"><a href="#存储引擎" class="headerlink" title="存储引擎"></a>存储引擎</h2><h3 id="MySQL-体系结构"><a href="#MySQL-体系结构" class="headerlink" title="MySQL 体系结构"></a>MySQL 体系结构</h3><p><img src="/../images/MySQL%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84.png" alt="MySQL体系结构" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="/../images/MySQL%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84.png" class="lozad post-image"></p>
 <p><strong>连接层</strong></p>
 <p>最上层是一些客户端和链接服务，主要完成一些类似于连接处理、授权认证、及相关的安全方案。服务器也会为安全接入的每个客户端验证它所具有的操作权限。</p>
 <p><strong>服务层</strong></p>
@@ -219,7 +219,7 @@
 </tr>
 </tbody></table>
 <p><strong>InnoDB 逻辑存储结构</strong></p>
-<p><img src="https://dhc.pythonanywhere.com/media/editor/%E9%80%BB%E8%BE%91%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84_20220316030616590001.png" alt="InnoDB逻辑存储结构" title="InnoDB逻辑存储结构" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://dhc.pythonanywhere.com/media/editor/%E9%80%BB%E8%BE%91%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84_20220316030616590001.png" class="lozad post-image"></p>
+<p><img src="/../images/InnoDB%20%E9%80%BB%E8%BE%91%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84.png" alt="InnoDB逻辑存储结构" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="/../images/InnoDB%20%E9%80%BB%E8%BE%91%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84.png" class="lozad post-image"></p>
 <h4 id="MyISAM"><a href="#MyISAM" class="headerlink" title="MyISAM"></a>MyISAM</h4><p>MyISAM 是 MySQL 早期的默认存储引擎</p>
 <p><strong>特点</strong></p>
 <ul>
@@ -393,7 +393,7 @@
 <div class="post-note note-success"><p>平常所说的索引，如果没有特别指明，都是指 B+树结构的索引</p></div>
 
 <h4 id="B-Tree（多路平衡查找树）"><a href="#B-Tree（多路平衡查找树）" class="headerlink" title="B-Tree（多路平衡查找树）"></a>B-Tree（多路平衡查找树）</h4><p>以一颗最大度数（max-degree）为 5（5 阶）的 b-tree 为例（每个节点最多存储 4 个 key，5 个指针）</p>
-<p><img src="https://dhc.pythonanywhere.com/media/editor/B-Tree%E7%BB%93%E6%9E%84_20220316163813441163.png" alt="B-Tree结构" title="B-Tree结构" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://dhc.pythonanywhere.com/media/editor/B-Tree%E7%BB%93%E6%9E%84_20220316163813441163.png" class="lozad post-image"></p>
+<p><img src="/../images/B-Tree%E7%BB%93%E6%9E%84.png" alt="B-Tree结构" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="/../images/B-Tree%E7%BB%93%E6%9E%84.png" class="lozad post-image"></p>
 <blockquote>
 <p>演示地址：<a target="_blank" rel="noopener" href="https://www.cs.usfca.edu/~galles/visualization/BTree.html">https://www.cs.usfca.edu/~galles/visualization/BTree.html</a></p>
 </blockquote>
@@ -404,16 +404,16 @@
 </ul>
 <p><strong>结构</strong></p>
 <p>以一颗最大度数（ max-degree）为 4（4 阶）的 b+tree 为例</p>
-<p><img src="https://dhc.pythonanywhere.com/media/editor/B+Tree%E7%BB%93%E6%9E%84%E5%9B%BE_20220316170700591277.png" alt="B+Tree结构图" title="B+Tree结构图" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://dhc.pythonanywhere.com/media/editor/B+Tree%E7%BB%93%E6%9E%84%E5%9B%BE_20220316170700591277.png" class="lozad post-image"></p>
+<p><img src="/../images/B+Tree%E7%BB%93%E6%9E%84%E5%9B%BE.png" alt="B+Tree结构图" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="/../images/B+Tree%E7%BB%93%E6%9E%84%E5%9B%BE.png" class="lozad post-image"></p>
 <blockquote>
 <p>演示地址：<a target="_blank" rel="noopener" href="https://www.cs.usfca.edu/~galles/visualization/BPlusTree.html">https://www.cs.usfca.edu/~galles/visualization/BPlusTree.html</a></p>
 </blockquote>
 <p><strong>MySQL B+Tree 索引结构</strong></p>
 <p>MySQL 索引数据结构对经典的 B+Tree 进行了优化，在原 B+Tree 的基础上，增加一个指向相邻叶子节点的链表指针，就形成了带有顺序指针的 B+Tree，提高区间访问的性能</p>
-<p><img src="https://dhc.pythonanywhere.com/media/editor/%E7%BB%93%E6%9E%84%E5%9B%BE_20220316171730865611.png" alt="MySQL B+Tree 结构图" title="MySQL B+Tree 结构图" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://dhc.pythonanywhere.com/media/editor/%E7%BB%93%E6%9E%84%E5%9B%BE_20220316171730865611.png" class="lozad post-image"></p>
+<p><img src="/../images/MySQL%20B+Tree%E7%B4%A2%E5%BC%95%E7%BB%93%E6%9E%84.png" alt="MySQL B+Tree 结构图" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="/../images/MySQL%20B+Tree%E7%B4%A2%E5%BC%95%E7%BB%93%E6%9E%84.png" class="lozad post-image"></p>
 <h4 id="Hash"><a href="#Hash" class="headerlink" title="Hash"></a>Hash</h4><p>哈希索引就是采用一定的 hash 算法，将键值换算成新的 hash 值，映射到对应的槽位上，然后存储在 hash 表中</p>
 <p>如果两个（或多个）键值，映射到一个相同的槽位上，他们就产生了 hash 冲突（也称为 hash 碰撞），可以通过链表来解决</p>
-<p><img src="https://dhc.pythonanywhere.com/media/editor/Hash%E7%B4%A2%E5%BC%95%E5%8E%9F%E7%90%86%E5%9B%BE_20220317143226150679.png" alt="Hash索引原理图" title="Hash索引原理图" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="https://dhc.pythonanywhere.com/media/editor/Hash%E7%B4%A2%E5%BC%95%E5%8E%9F%E7%90%86%E5%9B%BE_20220317143226150679.png" class="lozad post-image"></p>
+<p><img src="/../images/Hash%E7%B4%A2%E5%BC%95%E5%8E%9F%E7%90%86%E5%9B%BE.png" alt="Hash索引原理图" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="/../images/Hash%E7%B4%A2%E5%BC%95%E5%8E%9F%E7%90%86%E5%9B%BE.png" class="lozad post-image"></p>
 <p><strong>特点</strong></p>
 <ul>
 <li>Hash 索引只能用于对等比较（&#x3D;、in），不支持范围查询（betwwn、&gt;、&lt;、…）</li>
