@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html>
+<meta  lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#fff" id="theme-color">
+  <link rel="icon" href="/img/logo.png">
+  <title>wuxt</title>
+  <script>
+    // control reverse button
+    var reverseDarkList = {
+      dark: 'light',
+      light: 'dark'
+    };
+    var themeColor = {
+      dark: '#1c1c1e',
+      light: '#fff'
+    }
+    // get the data of css prefers-color-scheme
+    var getCssMediaQuery = function() {
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    };
+    // reverse current darkmode setting function
+    var reverseDarkModeSetting = function() {
+      var setting = localStorage.getItem('user-color-scheme');
+      if(reverseDarkList[setting]) {
+        setting = reverseDarkList[setting];
+      } else if(setting === null) {
+        setting = reverseDarkList[getCssMediaQuery()];
+      } else {
+        return;
+      }
+      localStorage.setItem('user-color-scheme', setting);
+      return setting;
+    };
+    // apply current darkmode setting
+    var setDarkmode = function(mode) {
+      var setting = mode || localStorage.getItem('user-color-scheme');
+      if(setting === getCssMediaQuery()) {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[setting];
+      } else if(reverseDarkList[setting]) {
+        document.documentElement.setAttribute('data-user-color-scheme', setting);
+        document.getElementById('theme-color').content = themeColor[setting];
+      } else {
+        document.documentElement.removeAttribute('data-user-color-scheme');
+        localStorage.removeItem('user-color-scheme');
+        document.getElementById('theme-color').content = themeColor[getCssMediaQuery()];
+      }
+    };
+    setDarkmode();
+  </script>
+  <script>
+    function loadScript(url, cb) {
+      var script = document.createElement('script');
+      script.src = url;
+      if (cb) script.onload = cb;
+      script.async = true;
+      document.body.appendChild(script);
+    }
+  </script>
+  
+  <link rel="preload" href="//at.alicdn.com/t/font_1946621_vpj3dq9ceqa.css" as="style" >
+  <link rel="preload" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css" as="style" >
+  
+  <link rel="preload" href="//cdn.jsdelivr.net/npm/fslightbox@3.1.0/index.min.js" as="script">
+  
+  
+  <link rel="preload" href="/js/lib/lozad.min.js" as="script">
+  
+  
+  
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1946621_vpj3dq9ceqa.css">
+
+  
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1952792_89b4ac4k4up.css">
+
+  
+  
+  
+  
+  
+  <link href="/js/lib/prism/prism-tomorrow.min.css" rel="stylesheet" data-prism="prism-tomorrow">
+  
+  
+  
+<link rel="stylesheet" href="/js/lib/prism/prism-line-numbers.min.css">
+
+  
+  
+  
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <div class="wrapper">
+    
+    <nav class="navbar">
+  <div class="navbar-logo">
+    <span class="navbar-logo-main">
+      
+      <img class="navbar-logo-img" src="/img/logo.png">
+      
+      <span class="navbar-logo-dsc">wuxt</span>
+    </span>
+  </div>
+  <div class="navbar-menu">
+    
+    <a href="/" class="navbar-menu-item">Home </a>
+    
+    <a href="/archives" class="navbar-menu-item">Archive </a>
+    
+    <a href="/tags" class="navbar-menu-item">Tags </a>
+    
+    <a href="/categories" class="navbar-menu-item">Categories </a>
+    
+    <a href="/about" class="navbar-menu-item">About </a>
+    
+    <a href="/links" class="navbar-menu-item">Friends </a>
+    
+    <a class="navbar-menu-item darknavbar" id="dark"><i class="iconfont icon-weather"></i></a>
+  </div>
+</nav>
+    
+    <div class="section-wrap">
+      <div class="container">
+        <div class="columns">
+          <main class="main-column">
+<article class="card card-content">
+  <header>
+    <h1 class="post-title">
+      Redux笔记
+    </h1>
+  </header>
+  <div class="post-meta post-show-meta">
+    <time datetime="2022-04-29T05:58:42.000Z" style="display: flex; align-items: center;">
+      <i class="iconfont icon-calendar" style="margin-right: 2px;"></i>
+      <span>2022-04-29</span>
+    </time>
+    
+    <span class="dot"></span>
+    
+    <a href="/categories/React/" class="post-meta-link">React</a>
+    
+    
+    
+    <span class="dot"></span>
+    <span>817 words</span>
+    
+  </div>
+  
+  <div class="post-meta post-show-meta" style="margin-top: -10px;">
+    <div style="display: flex; align-items: center;">
+      <i class="iconfont icon-biaoqian" style="margin-right: 2px; font-size: 1.15rem;"></i>
+      
+      
+        <a href="/tags/Redux/" class="post-meta-link">Redux</a>
+      
+    </div>
+  </div>
+  
+  </header>
+  <div id="section" class="post-content">
+    <h2 id="Flux"><a href="#Flux" class="headerlink" title="Flux"></a>Flux</h2><p>Flux 是一种架构思想，专门解决软件的结构问题；它跟 MVC 架构是同一类东西，但是更加简单和清晰</p>
+<p>Flux 存在多种实现（<a target="_blank" rel="noopener" href="https://github.com/voronianski/flux-comparison">至少 15 种</a>）</p>
+<p>Flux 将一个应用分成四个部分</p>
+<ul>
+<li><strong>View</strong>： 视图层</li>
+<li><strong>Action</strong>（动作）：视图层发出的消息（比如 mouseClick）</li>
+<li><strong>Dispatcher</strong>（派发器）：用来接收 Actions、执行回调函数</li>
+<li><strong>Store</strong>（数据层）：用来存放应用的状态，一旦发生变动，就提醒 Views 要更新页面</li>
+</ul>
+<p><img src="/../images/Redux%E7%AC%94%E8%AE%B0/flux.png" alt="flux" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="/../images/Redux%E7%AC%94%E8%AE%B0/flux.png" class="lozad post-image"></p>
+<p>Flux 的最大特点，就是<strong style="color:#ff7500">单向数据流</strong></p>
+<ol>
+<li>用户访问 View</li>
+<li>View 发出用户的 Action</li>
+<li>Dispatcher 收到 Action，要求 Store 进行相应的更新</li>
+<li>Store 更新后，发出一个”change”事件</li>
+<li>View 收到”change”事件后，更新页面</li>
+</ol>
+<p><a target="_blank" rel="noopener" href="https://ruanyifeng.com/blog/2016/01/flux.html">Flux 架构入门教程 - 阮一峰的网络日志 (ruanyifeng.com)</a></p>
+<h2 id="Redux"><a href="#Redux" class="headerlink" title="Redux"></a>Redux</h2><h3 id="Redux-工作流"><a href="#Redux-工作流" class="headerlink" title="Redux 工作流"></a>Redux 工作流</h3><p><img src="/../images/Redux%E7%AC%94%E8%AE%B0/ReduxDataFlowDiagram.gif" alt="Redux工作流" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="/../images/Redux%E7%AC%94%E8%AE%B0/ReduxDataFlowDiagram.gif" class="lozad post-image"></p>
+<h3 id="redux-原理"><a href="#redux-原理" class="headerlink" title="redux 原理"></a>redux 原理</h3><p>简易版</p>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">function</span> <span class="token function">createStore</span><span class="token punctuation">(</span><span class="token parameter">reducer</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">var</span> list <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+  <span class="token keyword">var</span> state <span class="token operator">=</span> <span class="token function">reducer</span><span class="token punctuation">(</span><span class="token keyword">undefined</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+
+  <span class="token keyword">function</span> <span class="token function">subscribe</span><span class="token punctuation">(</span><span class="token parameter">callback</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    list<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>callback<span class="token punctuation">)</span>
+  <span class="token punctuation">&#125;</span>
+
+  <span class="token keyword">function</span> <span class="token function">dispatch</span><span class="token punctuation">(</span><span class="token parameter">action</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    state <span class="token operator">=</span> <span class="token function">reducer</span><span class="token punctuation">(</span>state<span class="token punctuation">,</span> action<span class="token punctuation">)</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">var</span> i <span class="token keyword">in</span> list<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      list<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">&amp;&amp;</span> list<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span>
+
+  <span class="token keyword">function</span> <span class="token function">getState</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> state
+  <span class="token punctuation">&#125;</span>
+  <span class="token keyword">return</span> <span class="token punctuation">&#123;</span>
+    subscribe<span class="token punctuation">,</span>
+    dispatch<span class="token punctuation">,</span>
+    getState
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="Redux-使用的三大原则"><a href="#Redux-使用的三大原则" class="headerlink" title="Redux 使用的三大原则"></a>Redux 使用的三大原则</h3><ul>
+<li>state 以单一对象存储在 store 对象中</li>
+<li>state 只读（每次都返回一个新的对象)</li>
+<li>使用<strong>纯函数</strong> reducer 执行 state 更新</li>
+</ul>
+<p><strong>纯函数</strong></p>
+<ul>
+<li>对外界没有副作用</li>
+<li>同样的输入得到同样的输出</li>
+</ul>
+<h3 id="Reducer-扩展"><a href="#Reducer-扩展" class="headerlink" title="Reducer 扩展"></a>Reducer 扩展</h3><p>如果如果不同的 action 所处理的属性之间没有联系，我们可以把 Reducer 函数拆分</p>
+<p>不同的函数负责处理不同属性，最终把它们合并成一个大的 Reducer 即可</p>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">import</span> <span class="token punctuation">&#123;</span> createStore<span class="token punctuation">,</span> combineReducers <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'redux'</span>
+<span class="token keyword">import</span> CityReducer <span class="token keyword">from</span> <span class="token string">'./reducers/CityReducer'</span>
+<span class="token keyword">import</span> TabbarReducer <span class="token keyword">from</span> <span class="token string">'./reducers/TabbarReducer'</span>
+
+<span class="token keyword">const</span> reducer <span class="token operator">=</span> <span class="token function">combineReducers</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+  CityReducer<span class="token punctuation">,</span>
+  TabbarReducer
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> store <span class="token operator">=</span> <span class="token function">createStore</span><span class="token punctuation">(</span>reducer<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token comment">// 访问</span>
+store<span class="token punctuation">.</span><span class="token function">getState</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>TabbarReducer<span class="token punctuation">.</span>show
+store<span class="token punctuation">.</span><span class="token function">getState</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>CityReducer<span class="token punctuation">.</span>cityName<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="Redux-中间件"><a href="#Redux-中间件" class="headerlink" title="Redux 中间件"></a>Redux 中间件</h3><p>为了处理异步情况</p>
+<h4 id="Redux-异步工作流"><a href="#Redux-异步工作流" class="headerlink" title="Redux 异步工作流"></a>Redux 异步工作流</h4><p><img src="/../images/Redux%E7%AC%94%E8%AE%B0/ReduxAsyncDataFlowDiagram.gif" alt="Redux异步工作流" srcset="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20300'%3E%3C/svg%3E" data-src="/../images/Redux%E7%AC%94%E8%AE%B0/ReduxAsyncDataFlowDiagram.gif" class="lozad post-image"></p>
+<h4 id="中间件原理"><a href="#中间件原理" class="headerlink" title="中间件原理"></a>中间件原理</h4><pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token function">thinkMiddleware</span><span class="token punctuation">(</span><span class="token parameter"><span class="token punctuation">&#123;</span>dispatch<span class="token punctuation">,</span>getState<span class="token punctuation">&#125;</span></span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> <span class="token parameter">next</span> <span class="token operator">=></span> <span class="token parameter">action</span> <span class="token operator">=></span> 
+   		<span class="token keyword">typeof</span> action <span class="token operator">===</span> <span class="token string">'function'</span><span class="token operator">?</span>
+        	<span class="token function">action</span><span class="token punctuation">(</span>diapatch<span class="token punctuation">,</span> getState<span class="token punctuation">)</span><span class="token operator">:</span>
+    		<span class="token function">next</span><span class="token punctuation">(</span>action<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="redux-thunk"><a href="#redux-thunk" class="headerlink" title="redux-thunk"></a>redux-thunk</h4><p>返回值是函数，接收<code>dispatch</code>，<code>getState</code>两个参数</p>
+<p>store</p>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">import</span> reduxThunk <span class="token keyword">from</span> <span class="token string">'redux-thunk'</span>
+<span class="token keyword">import</span> <span class="token punctuation">&#123;</span> applyMiddleware <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'redux'</span>
+
+<span class="token keyword">const</span> store <span class="token operator">=</span> <span class="token function">createStore</span><span class="token punctuation">(</span>fetcheReducer<span class="token punctuation">,</span> <span class="token function">applyMiddleware</span><span class="token punctuation">(</span>reduxThunk<span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>actionCreator</p>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">import</span> axios <span class="token keyword">from</span> <span class="token string">'axios'</span>
+
+<span class="token keyword">function</span> <span class="token function">getCinemaListAction</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token parameter">dispatch<span class="token punctuation">,</span> getState</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    axios<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>url<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token parameter">res</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+      <span class="token function">dispatch</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+        <span class="token literal-property property">type</span><span class="token operator">:</span> <span class="token string">'xxx'</span><span class="token punctuation">,</span>
+        <span class="token literal-property property">payload</span><span class="token operator">:</span> res<span class="token punctuation">.</span>data
+      <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> getCinemaListAction<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="redux-promise"><a href="#redux-promise" class="headerlink" title="redux-promise"></a>redux-promise</h4><p>返回值是promise对象</p>
+<p>store</p>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">import</span> reduxPromise <span class="token keyword">from</span> <span class="token string">'redux-promise'</span>
+<span class="token keyword">import</span> <span class="token punctuation">&#123;</span> applyMiddleware <span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'redux'</span>
+
+<span class="token keyword">const</span> store <span class="token operator">=</span> <span class="token function">createStore</span><span class="token punctuation">(</span>fetcheReducer<span class="token punctuation">,</span> <span class="token function">applyMiddleware</span><span class="token punctuation">(</span>reduxPromise<span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>actionCreator</p>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">import</span> axios <span class="token keyword">from</span> <span class="token string">'axios'</span>
+
+<span class="token keyword">function</span> <span class="token function">getCinemaListAction</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">return</span> axios<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>url<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token parameter">res</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> <span class="token punctuation">&#123;</span>
+      <span class="token literal-property property">type</span><span class="token operator">:</span> <span class="token string">'changeList'</span><span class="token punctuation">,</span>
+      <span class="token literal-property property">payload</span><span class="token operator">:</span> res<span class="token punctuation">.</span>data
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> getCinemaListAction<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="Redux-DevTools-Extension"><a href="#Redux-DevTools-Extension" class="headerlink" title="Redux DevTools Extension"></a>Redux DevTools Extension</h3><p><a target="_blank" rel="noopener" href="https://github.com/reduxjs/redux-devtools/tree/main/extension#installation">redux-devtools&#x2F;extension at main · reduxjs&#x2F;redux-devtools · GitHub</a></p>
+<h2 id="react-redux"><a href="#react-redux" class="headerlink" title="react-redux"></a>react-redux</h2><p><a target="_blank" rel="noopener" href="https://www.redux.org.cn/docs/react-redux/">react-redux 文档 · Redux</a></p>
+<p><a target="_blank" rel="noopener" href="https://react-redux.js.org/">React Redux | React Redux (react-redux.js.org)</a></p>
+<h3 id="HOC与context通信在react-redux底层中的应用"><a href="#HOC与context通信在react-redux底层中的应用" class="headerlink" title="HOC与context通信在react-redux底层中的应用"></a>HOC与context通信在react-redux底层中的应用</h3><ul>
+<li>connect 是HOC，高阶组件</li>
+<li>Provider组件，可以让容器组件拿到state ，使用了context</li>
+</ul>
+<h3 id="高阶组件构建与应用"><a href="#高阶组件构建与应用" class="headerlink" title="高阶组件构建与应用"></a>高阶组件构建与应用</h3><p>HOC不仅仅是一个方法，确切说应该是一个组件工厂，获取低阶组件，生成高阶组件</p>
+<ul>
+<li>代码复用，代码模块化</li>
+<li>增删改prop</li>
+<li>渲染劫持</li>
+</ul>
+<pre class="line-numbers language-jsx" data-language="jsx"><code class="language-jsx"><span class="token keyword">import</span> React <span class="token keyword">from</span> <span class="token string">'react'</span>
+
+<span class="token keyword">function</span> <span class="token function">NotFound</span><span class="token punctuation">(</span><span class="token parameter">props</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>props<span class="token punctuation">.</span>a<span class="token punctuation">)</span> <span class="token comment">// aaa</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>props<span class="token punctuation">.</span>b<span class="token punctuation">)</span> <span class="token comment">// ƒ b() &#123;&#125;</span>
+  <span class="token keyword">return</span> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">></span></span><span class="token plain-text">404 not found</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">function</span> <span class="token function">myConnect</span><span class="token punctuation">(</span><span class="token parameter">cb<span class="token punctuation">,</span> obj</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">const</span> value <span class="token operator">=</span> <span class="token function">cb</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token keyword">return</span> <span class="token parameter">MyComponent</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> <span class="token parameter">props</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+      <span class="token keyword">return</span> <span class="token punctuation">(</span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">style</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#123;</span> <span class="token literal-property property">color</span><span class="token operator">:</span> <span class="token string">'red'</span> <span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span></span><span class="token punctuation">></span></span><span class="token plain-text">
+          </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token class-name">MyComponent</span></span> <span class="token spread"><span class="token punctuation">&#123;</span><span class="token operator">...</span>value<span class="token punctuation">&#125;</span></span> <span class="token spread"><span class="token punctuation">&#123;</span><span class="token operator">...</span>props<span class="token punctuation">&#125;</span></span> <span class="token spread"><span class="token punctuation">&#123;</span><span class="token operator">...</span>obj<span class="token punctuation">&#125;</span></span> <span class="token punctuation">/></span></span><span class="token plain-text">
+        </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+      <span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token function">myConnect</span><span class="token punctuation">(</span>
+  <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> <span class="token punctuation">&#123;</span>
+      <span class="token literal-property property">a</span><span class="token operator">:</span> <span class="token string">'aaa'</span>
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token punctuation">&#123;</span>
+    <span class="token function">b</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">)</span><span class="token punctuation">(</span>NotFound<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="redux-persist"><a href="#redux-persist" class="headerlink" title="redux-persist"></a>redux-persist</h3><p><a target="_blank" rel="noopener" href="https://github.com/rt2zz/redux-persist">GitHub - rt2zz&#x2F;redux-persist: persist and rehydrate a redux store</a></p>
+<div class="post-note note-success"></div>
+
+<p><strong style="color:#ff7500"></strong></p>
+<p>『』</p>
+
+  </div>
+  <div>
+  
+  </div>
+</article>
+<div class="nav">
+  
+  <div class="nav-item-prev">
+    <a href="/2022/04/30/Immutable/" class="nav-link">
+      <i class="iconfont icon-left nav-prev-icon"></i>
+      <div>
+        <div class="nav-label">Prev</div>
+        
+        <div class="nav-title">Immutable </div>
+        
+      </div>
+    </a>
+  </div>
+  
+  
+  <div class="nav-item-next">
+    <a href="/2022/04/29/Untitled/" class="nav-link">
+      <div>
+        <div class="nav-label">Next</div>
+        
+      </div>
+      <i class="iconfont icon-right nav-next-icon"></i>
+    </a>
+  </div>
+  
+</div>
+
+<div class="card card-content toc-card" id="mobiletoc">
+  <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>TOC</div>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Flux"><span class="toc-text">Flux</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Redux"><span class="toc-text">Redux</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Redux-%E5%B7%A5%E4%BD%9C%E6%B5%81"><span class="toc-text">Redux 工作流</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#redux-%E5%8E%9F%E7%90%86"><span class="toc-text">redux 原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Redux-%E4%BD%BF%E7%94%A8%E7%9A%84%E4%B8%89%E5%A4%A7%E5%8E%9F%E5%88%99"><span class="toc-text">Redux 使用的三大原则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Reducer-%E6%89%A9%E5%B1%95"><span class="toc-text">Reducer 扩展</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Redux-%E4%B8%AD%E9%97%B4%E4%BB%B6"><span class="toc-text">Redux 中间件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Redux-%E5%BC%82%E6%AD%A5%E5%B7%A5%E4%BD%9C%E6%B5%81"><span class="toc-text">Redux 异步工作流</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%AD%E9%97%B4%E4%BB%B6%E5%8E%9F%E7%90%86"><span class="toc-text">中间件原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#redux-thunk"><span class="toc-text">redux-thunk</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#redux-promise"><span class="toc-text">redux-promise</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Redux-DevTools-Extension"><span class="toc-text">Redux DevTools Extension</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#react-redux"><span class="toc-text">react-redux</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#HOC%E4%B8%8Econtext%E9%80%9A%E4%BF%A1%E5%9C%A8react-redux%E5%BA%95%E5%B1%82%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8"><span class="toc-text">HOC与context通信在react-redux底层中的应用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%AB%98%E9%98%B6%E7%BB%84%E4%BB%B6%E6%9E%84%E5%BB%BA%E4%B8%8E%E5%BA%94%E7%94%A8"><span class="toc-text">高阶组件构建与应用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#redux-persist"><span class="toc-text">redux-persist</span></a></li></ol></li></ol>
+</div></main>
+          <aside class="left-column">
+            
+            <div class="card card-author">
+              
+<img src="/img/logo.png" class="author-img">
+
+<p class="author-name">wuxt</p>
+<p class="author-description"></p>
+<div class="author-message">
+  <a class="author-posts-count" href="/archives">
+    <span>20</span>
+    <span>Posts</span>
+  </a>
+  <a class="author-categories-count" href="/categories">
+    <span>9</span>
+    <span>Categories</span>
+  </a>
+  <a class="author-tags-count" href="/tags">
+    <span>13</span>
+    <span>Tags</span>
+  </a>
+</div>
+
+            </div>
+            
+            <div class="sticky-tablet">
+  
+  
+  <article class="display-when-two-columns spacer">
+    <div class="card card-content toc-card">
+      <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>TOC</div>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Flux"><span class="toc-text">Flux</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Redux"><span class="toc-text">Redux</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Redux-%E5%B7%A5%E4%BD%9C%E6%B5%81"><span class="toc-text">Redux 工作流</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#redux-%E5%8E%9F%E7%90%86"><span class="toc-text">redux 原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Redux-%E4%BD%BF%E7%94%A8%E7%9A%84%E4%B8%89%E5%A4%A7%E5%8E%9F%E5%88%99"><span class="toc-text">Redux 使用的三大原则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Reducer-%E6%89%A9%E5%B1%95"><span class="toc-text">Reducer 扩展</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Redux-%E4%B8%AD%E9%97%B4%E4%BB%B6"><span class="toc-text">Redux 中间件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Redux-%E5%BC%82%E6%AD%A5%E5%B7%A5%E4%BD%9C%E6%B5%81"><span class="toc-text">Redux 异步工作流</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%AD%E9%97%B4%E4%BB%B6%E5%8E%9F%E7%90%86"><span class="toc-text">中间件原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#redux-thunk"><span class="toc-text">redux-thunk</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#redux-promise"><span class="toc-text">redux-promise</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Redux-DevTools-Extension"><span class="toc-text">Redux DevTools Extension</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#react-redux"><span class="toc-text">react-redux</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#HOC%E4%B8%8Econtext%E9%80%9A%E4%BF%A1%E5%9C%A8react-redux%E5%BA%95%E5%B1%82%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8"><span class="toc-text">HOC与context通信在react-redux底层中的应用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%AB%98%E9%98%B6%E7%BB%84%E4%BB%B6%E6%9E%84%E5%BB%BA%E4%B8%8E%E5%BA%94%E7%94%A8"><span class="toc-text">高阶组件构建与应用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#redux-persist"><span class="toc-text">redux-persist</span></a></li></ol></li></ol>
+    </div>
+  </article>
+  
+  
+  <article class="card card-content">
+    <div class="categories-card">
+  <div class="categories-header"><i class="iconfont icon-fenlei" style="padding-right: 2px;"></i>Categories</div>
+  <div class="categories-list">
+    
+      <a href="/categories/常用工具">
+        <div class="categories-list-item">
+          常用工具
+          <span class="categories-list-item-badge">2</span>
+        </div>
+      </a>
+    
+      <a href="/categories/JavaScript">
+        <div class="categories-list-item">
+          JavaScript
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/Nodejs">
+        <div class="categories-list-item">
+          Nodejs
+          <span class="categories-list-item-badge">4</span>
+        </div>
+      </a>
+    
+      <a href="/categories/解决方案">
+        <div class="categories-list-item">
+          解决方案
+          <span class="categories-list-item-badge">2</span>
+        </div>
+      </a>
+    
+      <a href="/categories/Vue">
+        <div class="categories-list-item">
+          Vue
+          <span class="categories-list-item-badge">2</span>
+        </div>
+      </a>
+    
+      <a href="/categories/Typescript">
+        <div class="categories-list-item">
+          Typescript
+          <span class="categories-list-item-badge">1</span>
+        </div>
+      </a>
+    
+      <a href="/categories/Mysql">
+        <div class="categories-list-item">
+          Mysql
+          <span class="categories-list-item-badge">2</span>
+        </div>
+      </a>
+    
+      <a href="/categories/React">
+        <div class="categories-list-item">
+          React
+          <span class="categories-list-item-badge">3</span>
+        </div>
+      </a>
+    
+      <a href="/categories/第三方库">
+        <div class="categories-list-item">
+          第三方库
+          <span class="categories-list-item-badge">2</span>
+        </div>
+      </a>
+    
+  </div>
+</div>
+  </article>
+  
+  <article class="card card-content">
+    <div class="tags-card">
+  <div class="tags-header"><i class="iconfont icon-biaoqian" style="padding-right: 2px;"></i>hot tags</div>
+  <div class="tags-list">
+    
+    <a href="\tags\git" title="git"><div class="tags-list-item">git</div></a>
+    
+    <a href="\tags\hexo" title="hexo"><div class="tags-list-item">hexo</div></a>
+    
+    <a href="\tags\express" title="express"><div class="tags-list-item">express</div></a>
+    
+    <a href="\tags\模板" title="模板"><div class="tags-list-item">模板</div></a>
+    
+    <a href="\tags\koa" title="koa"><div class="tags-list-item">koa</div></a>
+    
+    <a href="\tags\eslint" title="eslint"><div class="tags-list-item">eslint</div></a>
+    
+    <a href="\tags\原理" title="原理"><div class="tags-list-item">原理</div></a>
+    
+    <a href="\tags\npm" title="npm"><div class="tags-list-item">npm</div></a>
+    
+    <a href="\tags\vue3" title="vue3"><div class="tags-list-item">vue3</div></a>
+    
+    <a href="\tags\react" title="react"><div class="tags-list-item">react</div></a>
+    
+    <a href="\tags\axios" title="axios"><div class="tags-list-item">axios</div></a>
+    
+    <a href="\tags\状态管理" title="状态管理"><div class="tags-list-item">状态管理</div></a>
+    
+    <a href="\tags\Redux" title="Redux"><div class="tags-list-item">Redux</div></a>
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+          </aside>
+          <aside class="right-column">
+            <div class="sticky-widescreen">
+  
+  
+  <article class="card card-content toc-card">
+    <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>TOC</div>
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Flux"><span class="toc-text">Flux</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Redux"><span class="toc-text">Redux</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Redux-%E5%B7%A5%E4%BD%9C%E6%B5%81"><span class="toc-text">Redux 工作流</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#redux-%E5%8E%9F%E7%90%86"><span class="toc-text">redux 原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Redux-%E4%BD%BF%E7%94%A8%E7%9A%84%E4%B8%89%E5%A4%A7%E5%8E%9F%E5%88%99"><span class="toc-text">Redux 使用的三大原则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Reducer-%E6%89%A9%E5%B1%95"><span class="toc-text">Reducer 扩展</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Redux-%E4%B8%AD%E9%97%B4%E4%BB%B6"><span class="toc-text">Redux 中间件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Redux-%E5%BC%82%E6%AD%A5%E5%B7%A5%E4%BD%9C%E6%B5%81"><span class="toc-text">Redux 异步工作流</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%AD%E9%97%B4%E4%BB%B6%E5%8E%9F%E7%90%86"><span class="toc-text">中间件原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#redux-thunk"><span class="toc-text">redux-thunk</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#redux-promise"><span class="toc-text">redux-promise</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Redux-DevTools-Extension"><span class="toc-text">Redux DevTools Extension</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#react-redux"><span class="toc-text">react-redux</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#HOC%E4%B8%8Econtext%E9%80%9A%E4%BF%A1%E5%9C%A8react-redux%E5%BA%95%E5%B1%82%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8"><span class="toc-text">HOC与context通信在react-redux底层中的应用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%AB%98%E9%98%B6%E7%BB%84%E4%BB%B6%E6%9E%84%E5%BB%BA%E4%B8%8E%E5%BA%94%E7%94%A8"><span class="toc-text">高阶组件构建与应用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#redux-persist"><span class="toc-text">redux-persist</span></a></li></ol></li></ol>
+  </article>
+  
+  
+  <article class="card card-content">
+    <div class="recent-posts-card">
+  <div class="recent-posts-header"><i class="iconfont icon-wenzhang_huaban" style="padding-right: 2px;"></i>Recent Posts</div>
+  <div class="recent-posts-list">
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2022-04-30</div>
+        <a href="/2022/04/30/Mobx/"><div class="recent-posts-item-content">Mobx</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2022-04-30</div>
+        <a href="/2022/04/30/Immutable/"><div class="recent-posts-item-content">Immutable</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2022-04-29</div>
+        <a href="/2022/04/29/Redux笔记/"><div class="recent-posts-item-content">Redux笔记</div></a>
+      </div>
+    
+      <div class="recent-posts-item">
+        <div class="recent-posts-item-title">2022-04-29</div>
+        <a href="/2022/04/29/Untitled/"><div class="recent-posts-item-content"></div></a>
+      </div>
+    
+  </div>
+</div>
+  </article>
+  
+  
+</div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <footer class="footer">
+  <div class="footer-container">
+    <div>
+      <div class="footer-dsc">
+        <span>Copyright ©
+          
+          2022 -
+          
+          2022
+        </span>
+        <a href="/" class="footer-link">wuxt </a>
+      </div>
+    </div>
+
+    
+    <div class="footer-dsc">
+      
+      
+      Powered by
+      <a href="https://hexo.io/" class="footer-link" target="_blank" rel="nofollow noopener noreferrer">&nbsp;Hexo </a>
+      
+      
+      <span>&nbsp;|&nbsp;</span>
+      
+      
+      
+      Theme -
+      <a href="https://github.com/theme-kaze" class="footer-link" target="_blank"
+        rel="nofollow noopener noreferrer">&nbsp;Kaze</a>
+      
+    </div>
+    
+    
+    
+    
+</footer>
+  <a role="button" id="scrollbutton" class="basebutton" >
+  <i class="iconfont icon-arrowleft button-icon"></i>
+</a>
+<a role="button" id="menubutton" class="basebutton">
+  <i class="iconfont icon-menu button-icon"></i>
+</a>
+<a role="button" id="popbutton" class="basebutton">
+  <i class="iconfont icon-expand button-icon"></i>
+</a>
+<a role="button" id="darkbutton" class="basebutton darkwidget">
+  <i class="iconfont icon-weather button-icon"></i>
+</a>
+
+  
+  
+  
+  <script>
+  var addImgLayout = function () {
+    var img = document.querySelectorAll('.post-content img');
+    var i;
+    for (i = 0; i < img.length; i++) {
+      var wrapper = document.createElement('a');
+      wrapper.setAttribute('data-fslightbox', 'gallery');
+      wrapper.setAttribute('href', img[i].getAttribute('data-src'));
+      wrapper.setAttribute('style', 'width: 100%; display: flex; justify-content: center;');
+      img[i].parentElement.insertBefore(wrapper, img[i]);
+      wrapper.appendChild(img[i]);
+    }
+    refreshFsLightbox();
+  }
+</script>
+<script>loadScript("//cdn.jsdelivr.net/npm/fslightbox@3.1.0/index.min.js", addImgLayout)</script>
+  
+  
+  
+<script src="/js/main.js"></script>
+
+  
+  
+  <script>
+    var addLazyload = function () {
+      var observer = lozad('.lozad', {
+        load: function (el) {
+          el.srcset = el.getAttribute('data-src');
+        },
+        loaded: function (el) {
+          el.classList.add('loaded');
+        }
+      });
+      observer.observe();
+    }
+  </script>
+  <script>loadScript("/js/lib/lozad.min.js", addLazyload)</script>
+  
+  
+</body>
+
+</html>
