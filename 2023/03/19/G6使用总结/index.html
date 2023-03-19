@@ -159,13 +159,29 @@
     
     
     <span class="dot"></span>
-    <span>1 words</span>
+    <span>258 words</span>
     
   </div>
   
   </header>
   <div id="section" class="post-content">
-    <p>ddd</p>
+    <h2 id="G6核心概念"><a href="#G6核心概念" class="headerlink" title="G6核心概念"></a>G6核心概念</h2><p>节点、边、combo、布局、交互</p>
+<h2 id="潜在bug"><a href="#潜在bug" class="headerlink" title="潜在bug"></a>潜在bug</h2><p><strong>bug</strong>：当自定义节点中赋予文本图形状态并取消后，该文本图形不会回到默认位置，而是会自动跳到节点中心位置</p>
+<p><strong>fix</strong>：可以在自定义节点的<code>setState</code>中设置失去某个状态后的默认样式解决</p>
+<h2 id="使用总结"><a href="#使用总结" class="headerlink" title="使用总结"></a>使用总结</h2><h3 id="节点"><a href="#节点" class="headerlink" title="节点"></a>节点</h3><h3 id="边"><a href="#边" class="headerlink" title="边"></a>边</h3><h3 id="combo"><a href="#combo" class="headerlink" title="combo"></a>combo</h3><ul>
+<li>非空combo不支持指定坐标，可以借助流水线子图布局，通过给子图指定布局中心的方式，给combo指定坐标</li>
+</ul>
+<h3 id="布局"><a href="#布局" class="headerlink" title="布局"></a>布局</h3><ul>
+<li>pipe 布局是异步的！！！</li>
+<li>流水线子图布局的每个布局可以配置 workerEnabled</li>
+</ul>
+<h3 id="交互"><a href="#交互" class="headerlink" title="交互"></a>交互</h3><ul>
+<li><p><code>zoom</code>和<code>zoomTo</code>的区别是：<code>zoom</code>是在当前画布比例下缩放，是相对比例，<code>zoomTo</code>是绝对比例</p>
+</li>
+<li><p>图形元素<code>opacity</code>设置为0时，需要通过 <code>shape.hide()</code> 隐藏才不会响应鼠标事件，通过 <code>shape.show()</code> 取消隐藏状态</p>
+<p>如果是整个节点或者边的话，通过 graph.hideItem(node) graph.showItem(edge) 来控制显示隐藏</p>
+</li>
+</ul>
 
   </div>
   <div>
@@ -191,7 +207,7 @@
 
 <div class="card card-content toc-card" id="mobiletoc">
   <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>TOC</div>
-
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#G6%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5"><span class="toc-text">G6核心概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%BD%9C%E5%9C%A8bug"><span class="toc-text">潜在bug</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93"><span class="toc-text">使用总结</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8A%82%E7%82%B9"><span class="toc-text">节点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%B9"><span class="toc-text">边</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#combo"><span class="toc-text">combo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%83%E5%B1%80"><span class="toc-text">布局</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%A4%E4%BA%92"><span class="toc-text">交互</span></a></li></ol></li></ol>
 </div></main>
           <aside class="left-column">
             
@@ -224,7 +240,7 @@
   <article class="display-when-two-columns spacer">
     <div class="card card-content toc-card">
       <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>TOC</div>
-
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#G6%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5"><span class="toc-text">G6核心概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%BD%9C%E5%9C%A8bug"><span class="toc-text">潜在bug</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93"><span class="toc-text">使用总结</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8A%82%E7%82%B9"><span class="toc-text">节点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%B9"><span class="toc-text">边</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#combo"><span class="toc-text">combo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%83%E5%B1%80"><span class="toc-text">布局</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%A4%E4%BA%92"><span class="toc-text">交互</span></a></li></ol></li></ol>
     </div>
   </article>
   
@@ -345,7 +361,7 @@
   
   <article class="card card-content toc-card">
     <div class="toc-header"><i class="iconfont icon-menu" style="padding-right: 2px;"></i>TOC</div>
-
+<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#G6%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5"><span class="toc-text">G6核心概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%BD%9C%E5%9C%A8bug"><span class="toc-text">潜在bug</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93"><span class="toc-text">使用总结</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8A%82%E7%82%B9"><span class="toc-text">节点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%B9"><span class="toc-text">边</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#combo"><span class="toc-text">combo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%83%E5%B1%80"><span class="toc-text">布局</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%A4%E4%BA%92"><span class="toc-text">交互</span></a></li></ol></li></ol>
   </article>
   
   
