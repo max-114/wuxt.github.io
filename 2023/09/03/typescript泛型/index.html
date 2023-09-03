@@ -159,21 +159,22 @@
     
     
     <span class="dot"></span>
-    <span>45 words</span>
+    <span>63 words</span>
     
   </div>
   
   </header>
   <div id="section" class="post-content">
     <ul>
-<li>&lt;T&gt;  &#x3D;&gt; 声明泛型</li>
+<li>&lt;T&gt; &#x3D;&gt; 声明泛型</li>
 <li>val: T &#x3D;&gt; 使用泛型</li>
-<li>调用函数时传入泛型的具体类型</li>
+<li>调用函数时传入泛型的具体类型，调用时也可以不串，ts 会进行类型推断</li>
 </ul>
 <pre class="line-numbers language-typescript" data-language="typescript"><code class="language-typescript"><span class="token keyword">function</span> <span class="token generic-function"><span class="token function">getId</span><span class="token generic class-name"><span class="token operator">&lt;</span><span class="token constant">T</span><span class="token operator">></span></span></span><span class="token punctuation">(</span>val<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
   <span class="token keyword">return</span> val
 <span class="token punctuation">&#125;</span>
-<span class="token generic-function"><span class="token function">getId</span><span class="token generic class-name"><span class="token operator">&lt;</span><span class="token builtin">number</span><span class="token operator">></span></span></span><span class="token punctuation">(</span><span class="token number">123</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token generic-function"><span class="token function">getId</span><span class="token generic class-name"><span class="token operator">&lt;</span><span class="token builtin">number</span><span class="token operator">></span></span></span><span class="token punctuation">(</span><span class="token number">123</span><span class="token punctuation">)</span>
+<span class="token function">getId</span><span class="token punctuation">(</span><span class="token string">'123'</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
   </div>
   <div>
