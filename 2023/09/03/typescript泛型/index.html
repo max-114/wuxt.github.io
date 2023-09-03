@@ -159,7 +159,7 @@
     
     
     <span class="dot"></span>
-    <span>171 words</span>
+    <span>212 words</span>
     
   </div>
   
@@ -182,15 +182,20 @@
 <span class="token punctuation">&#125;</span>
 <span class="token generic-function"><span class="token function">getId</span><span class="token generic class-name"><span class="token operator">&lt;</span><span class="token builtin">number</span><span class="token operator">></span></span></span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h2 id="给泛型添加约束"><a href="#给泛型添加约束" class="headerlink" title="给泛型添加约束"></a>给泛型添加约束</h2><p>解决泛型定义时，由于没有指定泛型的类型而无法使用对象身上的属性和方法的问题<br>（也可以通过typeof判断，类型收缩解决）</p>
-<pre class="line-numbers language-typescript" data-language="typescript"><code class="language-typescript"><span class="token keyword">interface</span> <span class="token class-name">ILength</span> <span class="token punctuation">&#123;</span>
+<h2 id="给泛型添加约束"><a href="#给泛型添加约束" class="headerlink" title="给泛型添加约束"></a>给泛型添加约束</h2><ul>
+<li>解决泛型定义时，由于没有指定泛型的类型而无法使用对象身上的属性和方法的问题（也可以通过typeof判断，类型收缩解决）</li>
+<li>添加约束以后，调用函数时传入的泛型类型需要具备接口中定义的属性</li>
+</ul>
+<pre class="line-numbers language-typescript" data-language="typescript"><code class="language-typescript"><span class="token comment">// 定义接口</span>
+<span class="token keyword">interface</span> <span class="token class-name">ILength</span> <span class="token punctuation">&#123;</span>
     length<span class="token operator">:</span> <span class="token builtin">number</span>
 <span class="token punctuation">&#125;</span>
 
+<span class="token comment">// 给泛型添加约束</span>
 <span class="token keyword">function</span> <span class="token generic-function"><span class="token function">getId</span><span class="token generic class-name"><span class="token operator">&lt;</span><span class="token constant">T</span> <span class="token keyword">extends</span> ILength<span class="token operator">></span></span></span><span class="token punctuation">(</span>val<span class="token operator">:</span> <span class="token constant">T</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
     <span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>val<span class="token punctuation">.</span>length<span class="token punctuation">)</span>
     <span class="token keyword">return</span> val
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
   </div>
   <div>
   
