@@ -159,7 +159,7 @@
     
     
     <span class="dot"></span>
-    <span>167 words</span>
+    <span>171 words</span>
     
   </div>
   
@@ -182,7 +182,7 @@
 <span class="token punctuation">&#125;</span>
 <span class="token generic-function"><span class="token function">getId</span><span class="token generic class-name"><span class="token operator">&lt;</span><span class="token builtin">number</span><span class="token operator">></span></span></span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h2 id="给泛型添加约束"><a href="#给泛型添加约束" class="headerlink" title="给泛型添加约束"></a>给泛型添加约束</h2><p>解决泛型定义时，由于没有指定泛型的类型而无法使用对象身上的属性和方法的问题<br>（也可以通过typeof进行判断）</p>
+<h2 id="给泛型添加约束"><a href="#给泛型添加约束" class="headerlink" title="给泛型添加约束"></a>给泛型添加约束</h2><p>解决泛型定义时，由于没有指定泛型的类型而无法使用对象身上的属性和方法的问题<br>（也可以通过typeof判断，类型收缩解决）</p>
 <pre class="line-numbers language-typescript" data-language="typescript"><code class="language-typescript"><span class="token keyword">interface</span> <span class="token class-name">ILength</span> <span class="token punctuation">&#123;</span>
     length<span class="token operator">:</span> <span class="token builtin">number</span>
 <span class="token punctuation">&#125;</span>
