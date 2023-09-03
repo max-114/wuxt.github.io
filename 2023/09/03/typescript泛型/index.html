@@ -159,7 +159,7 @@
     
     
     <span class="dot"></span>
-    <span>243 words</span>
+    <span>262 words</span>
     
   </div>
   
@@ -202,6 +202,14 @@
 <span class="token punctuation">&#125;</span>
 
 <span class="token function">getProp</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span> name<span class="token operator">:</span> <span class="token string">'wuxt'</span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token string">'name'</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>keyof</strong>常规用法</p>
+<pre class="line-numbers language-typescript" data-language="typescript"><code class="language-typescript"><span class="token keyword">type</span> <span class="token class-name">Friend</span> <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+  name<span class="token operator">:</span> <span class="token builtin">string</span>
+  age<span class="token operator">:</span> <span class="token builtin">number</span>
+  hobby<span class="token operator">:</span> <span class="token builtin">string</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">let</span> num<span class="token operator">:</span> <span class="token keyword">keyof</span> Friend <span class="token operator">=</span> <span class="token string">''</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
   </div>
   <div>
